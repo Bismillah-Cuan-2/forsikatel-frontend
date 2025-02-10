@@ -5,15 +5,19 @@ import logoTelkomAkses from "../assets/images/logo_telkom_akses.png";
 import logoTelkom from "../assets/images/logo_telkom.png";
 import { HTMLAttributes } from "react";
 
+interface HeaderLogoProps {
+  className? : string
+  widthHeader?: string
+}
 
-const HeaderLogo = (props: HTMLAttributes<HTMLElement>) => {
+const HeaderLogo: React.FC<HeaderLogoProps> = ({className, widthHeader = "w-[29rem]"}) => {
   return (
-    <header className={`flex gap-5 w-[29rem] ${props}`}>
-        <img className="object-contain" src={logoBumn} alt="logo bumn" />
-        <img className="object-contain" src={logoAkhlak} alt="logo akhlak" /> 
-        <img className="object-contain" src={logoForsikatel} alt="logo forsikatel" />
-        <img className="object-contain" src={logoTelkom} alt="logo telkom" />
-        <img className="object-contain" src={logoTelkomAkses} alt="logo telkom akses" />
+    <header className={`flex gap-5 ${widthHeader}`}>
+        <img className={`object-contain ${className}`} src={logoBumn} alt="logo bumn" />
+        <img className={`object-contain ${className}`} src={logoAkhlak} alt="logo akhlak" /> 
+        <img className={`object-contain ${className}`} src={logoForsikatel} alt="logo forsikatel" />
+        <img className={`object-contain ${className}`} src={logoTelkom} alt="logo telkom" />
+        <img className={`object-contain ${className}`} src={logoTelkomAkses} alt="logo telkom akses" />
     </header>
   )
 }

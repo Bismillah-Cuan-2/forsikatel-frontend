@@ -1,12 +1,13 @@
 import register_img from '../assets/images/register_desktop.png'
 import { Formik, useFormik, useField, FieldConfig } from "formik"
 import HeaderLogo from './HeaderLogo'
-import { HTMLProps } from "react"
 import { validate } from "../util/validation"
 import { Link } from "react-router-dom"
 import RegisterInput from './RegisterInput'
 import searchSVG from '../assets/vectors/search.svg'
 import Button from './Button'
+import { useState } from "react"
+import RegionalPopOut from './RegionalPopOut'
 interface MyFormValues {
     namaLengkap: string,
     nomorHandphone: string,
@@ -17,7 +18,7 @@ interface MyFormValues {
 
 const initialValues: MyFormValues = { namaLengkap: '', nomorHandphone: '',  regional: '' };
 export const RegisterPage = () => {
-   
+    const [showSearch, setShowSearch] = useState(false);
     const formik = useFormik({
         initialValues,
         validate,
@@ -25,16 +26,17 @@ export const RegisterPage = () => {
             alert(JSON.stringify(values, null, 2))
         }
     })
+
   return (
     <>
-        <div className='relative p-[2.4rem] flex lg:flex-row sm:flex-col w-full h-screen'>
-            <div className='relative z-10 w-full'>
-                <img className='sm:hidden lg:inline object-contain w-[50rem] h-full' src={register_img} alt="register_desktop" />
+        <div className='relative px-1 py-5 md:p-[2.4rem] flex lg:flex-row sm:flex-col w-full h-screen'>
+            <div className='hidden lg:inline relative z-10 w-full'>
+                <img className='hidden lg:block object-contain w-[50rem] h-full' src={register_img} alt="register_desktop" />
             </div>
-            <section className='relative flex flex-col 2xl:w-full lg:py-[6rem] 2xl:py-[2rem] lg:pr-[5rem] 2xl:px-[6rem] lg:left-[-2rem] gap-5'>
+            <section className='relative flex flex-col px-2 2xl:w-full lg:py-[6rem] 2xl:py-[2rem] lg:pr-[5rem] 2xl:px-[6rem] lg:left-[-2rem] gap-5'>
                 <div className='flex flex-col gap-3'>
                     <div className='flex justify-center'>
-                        <HeaderLogo />
+                        <HeaderLogo className="w-[2rem]" widthHeader='w-auto md:w-[29rem]' />
                     </div>
                     
                     <div>
@@ -91,18 +93,30 @@ export const RegisterPage = () => {
                                                 id="regional" 
                                                 type="text" 
                                                 placeholder='Pilih kantor regionalmu'
-                                                onChange={formik.handleChange}
+                                                onChange={(value) => {
+                                                    setShowSearch(true);
+                                                    formik.handleChange("regional")(value);}}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.regional}
                                             />
                                         </div>
+                                        {showSearch && 
+                                            <RegionalPopOut 
+                                                searchRegional={formik.values.regional} 
+                                                isSearchOpen={showSearch} 
+                                                OnBlur={() => setShowSearch(false)} 
+                                                OnSelected={(e) => formik.setFieldValue("regional", e.regional)} 
+                                            /> 
+                                        }
                                     </div>
                                     <div className="w-full flex justify-center">
-                                        <button 
-                                            className="bg-primary-300 px-3 py-2 rounded-none text-white w-full hover:bg-primary-200 font-bold text-base font-source" 
-                                            type="submit">
+                                            <Button 
+                                                className="justify-center px-3 py-2 rounded-none font-bold text-base font-source"
+                                                color='bg-primary-300  text-white w-full hover:bg-primary-200 '
+                                                type="submit"
+                                            >
                                                 Daftar Sekarang
-                                        </button>
+                                            </Button>
                                     </div>
 
                                     <hr className="h-px my-8 border-0 bg-[#DDE1E6] " />

@@ -9,7 +9,7 @@ export const validate = (values: FormValues): Partial<FormValues> => {
   
     if (!values.namaLengkap) {
       errors.namaLengkap = 'Required';
-    } else if (values.namaLengkap.length > 15) {
+    } else if (values.namaLengkap.length > 100) {
       errors.namaLengkap = 'Must be 15 characters or less';
     }
   
