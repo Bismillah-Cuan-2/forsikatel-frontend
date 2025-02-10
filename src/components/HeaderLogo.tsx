@@ -3,10 +3,12 @@ import logoBumn from "../assets/images/logo_bumn.png";
 import logoForsikatel from "../assets/images/logo_forsikatel.png";
 import logoTelkomAkses from "../assets/images/logo_telkom_akses.png";
 import logoTelkom from "../assets/images/logo_telkom.png";
+import { HTMLAttributes } from "react";
 
-const HeaderLogo = () => {
+
+const HeaderLogo = (props: HTMLAttributes<HTMLElement>) => {
   return (
-    <header className="flex gap-5 w-[29rem]">
+    <header className={`flex gap-5 w-[29rem] ${props}`}>
         <img className="object-contain" src={logoBumn} alt="logo bumn" />
         <img className="object-contain" src={logoAkhlak} alt="logo akhlak" /> 
         <img className="object-contain" src={logoForsikatel} alt="logo forsikatel" />

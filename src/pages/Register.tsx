@@ -1,9 +1,9 @@
 // progress
-
+import { RegisterPage } from "../components/RegisterPage"
 const Register = () => {
     return (
-      <div>
-          <h1>Coming Soon Register Pages👷</h1>
+      <div className="w-full">
+          <RegisterPage />
       </div>
     )
   }
