@@ -8,7 +8,6 @@ export default {
         },
         colors: {
           neutral : {
-	
             50: "#F6F7F9" ,
             100:"#EDEDF1" ,
             200:"#D6D9E1" ,
