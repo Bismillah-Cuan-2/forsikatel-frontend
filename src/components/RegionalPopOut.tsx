@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom"
-import { useEffect, useRef } from "react"
+import {  useRef } from "react"
 
 const regionalList = [
     {
@@ -37,11 +37,11 @@ const regionalList = [
 
 interface RegionalPopOutProps {
     searchRegional: string,
-    isSearchOpen: boolean
+    isSearchOpen?: boolean
     OnBlur: () => void
     OnSelected: (e:{regional: string}) => void
 }
-const RegionalPopOut: React.FC<RegionalPopOutProps> = ({searchRegional, isSearchOpen, OnBlur, OnSelected}) => {
+const RegionalPopOut: React.FC<RegionalPopOutProps> = ({searchRegional,  OnBlur, OnSelected}) => {
     const popOutRef = useRef<HTMLDivElement>(null)
     function handleSelect(e: string) {
         OnSelected({regional: e})
@@ -58,12 +58,11 @@ const RegionalPopOut: React.FC<RegionalPopOutProps> = ({searchRegional, isSearch
   return (createPortal(
     <>
         <div className="overflow-y-auto absolute
-                text-sm font-light top-2/3 left-1/2 w-[25rem] max-h-[10rem] z-[999] border rounded-md mt-3 bg-neutral-100 px-2 py-2 scrollbar-popSearch"
+                text-sm font-light md:top-[64%] md:left-1/2 top-[71%]  w-[25rem] max-h-[10rem] z-[999] border rounded-md mt-3 bg-neutral-100 px-2 py-2 scrollbar-popSearch"
                 tabIndex={0}
                 ref={popOutRef}
                 onBlur={OnBlur}    
             >
-                    
             {filteredRegionalList.map((reg) => (
                 <div 
                     key={reg.id}

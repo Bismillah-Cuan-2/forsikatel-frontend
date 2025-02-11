@@ -1,13 +1,15 @@
 import register_img from '../assets/images/register_desktop.png'
-import { Formik, useFormik, useField, FieldConfig } from "formik"
+import noisyGradient from '../assets/images/noisyGradient.png'
+import { Formik, useFormik, } from "formik"
 import HeaderLogo from './HeaderLogo'
 import { validate } from "../util/validation"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import RegisterInput from './RegisterInput'
 import searchSVG from '../assets/vectors/search.svg'
 import Button from './Button'
 import { useState } from "react"
 import RegionalPopOut from './RegionalPopOut'
+
 interface MyFormValues {
     namaLengkap: string,
     nomorHandphone: string,
@@ -19,27 +21,43 @@ interface MyFormValues {
 const initialValues: MyFormValues = { namaLengkap: '', nomorHandphone: '',  regional: '' };
 export const RegisterPage = () => {
     const [showSearch, setShowSearch] = useState(false);
+
+    const Navigate = useNavigate()
     const formik = useFormik({
         initialValues,
         validate,
         onSubmit: (values) => {
             alert(JSON.stringify(values, null, 2))
+            handleSubmit(values)
         }
     })
 
+    function handleSubmit(e: MyFormValues) {
+        Navigate('/login')
+        console.log(e)
+    }
+
   return (
     <>
-        <div className='relative px-1 py-5 md:p-[2.4rem] flex lg:flex-row sm:flex-col w-full h-screen'>
-            <div className='hidden lg:inline relative z-10 w-full'>
-                <img className='hidden lg:block object-contain w-[50rem] h-full' src={register_img} alt="register_desktop" />
+         {/* Background gradient mobile */} 
+        <div className={`md:hidden fixed z-[-10] top-0 left-0`}>
+            <img className='object-cover w-full h-full' draggable={false} src={noisyGradient} alt="noisyGradient" />
+        </div>
+
+        {/* Background white for mobile */}
+        <div className='mt-[4.5rem] rounded-tl-[6rem] md:hidden fixed left-0 top-0 w-full h-screen bg-white'> </div>
+        <div className='mt-[7rem] md:mt-0 relative px-3 py-1 md:py-8 md:px-[2.4rem] flex lg:flex-row flex-col overflow-y-hidden md:overflow-hidden items-center w-full h-screen'>
+            {/* RegisterImage */}
+            <div className='hidden lg:block relative z-10 w-full'>
+                <img draggable={false} className='hidden  lg:block object-contain md:w-full 2xl:w-[35rem] h-full' src={register_img} alt="register_desktop" />
             </div>
-            <section className='relative flex flex-col px-2 2xl:w-full lg:py-[6rem] 2xl:py-[2rem] lg:pr-[5rem] 2xl:px-[6rem] lg:left-[-2rem] gap-5'>
-                <div className='flex flex-col gap-3'>
+            {/* Form Section */}
+            <section className='relative flex flex-col px-2 2xl:w-full lg:py-[6rem] 2xl:pt-[10rem] lg:pr-[5rem] 2xl:px-[6rem] lg:left-[-2rem] gap-5'>
+                <div className='flex flex-col  gap-3'>
                     <div className='flex justify-center'>
-                        <HeaderLogo className="w-[2rem]" widthHeader='w-auto md:w-[29rem]' />
-                    </div>
-                    
-                    <div>
+                        <HeaderLogo className="w-[1.6rem] md:w-full" widthHeader='w-auto md:w-[29rem] justify-center' />
+                    </div>          
+                    <div className='mt-[1rem]'>
                         <h2 className='text-[2.5rem] font-bold text-primary-300'>Mulai Perjalanan Mengajimu!</h2>
                         <p className='text-base font-normal font-source text-neutral-900'>
                             Daftar sekarang dan pantau progres mengaji dengan mudah
@@ -96,14 +114,20 @@ export const RegisterPage = () => {
                                                 onChange={(value) => {
                                                     setShowSearch(true);
                                                     formik.handleChange("regional")(value);}}
-                                                onBlur={formik.handleBlur}
+                                                onClick={() => setShowSearch(true)}    
+                                                onBlur={() => {
+                                                    setTimeout(() => {
+                                                        setShowSearch(false);
+                                                    }, 150);
+                                                    formik.handleBlur("regional")
+                                                    console.log(showSearch)
+                                                }}
                                                 value={formik.values.regional}
                                             />
                                         </div>
                                         {showSearch && 
                                             <RegionalPopOut 
                                                 searchRegional={formik.values.regional} 
-                                                isSearchOpen={showSearch} 
                                                 OnBlur={() => setShowSearch(false)} 
                                                 OnSelected={(e) => formik.setFieldValue("regional", e.regional)} 
                                             /> 
@@ -131,7 +155,7 @@ export const RegisterPage = () => {
                 </div>
             </section>
         </div>
-
+        
     </>
   )
 }
