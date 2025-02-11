@@ -30,3 +30,18 @@ body {
   min-height: 100vh;
   background-color: #F6F7F9;
 }
+
+.noisy-gradient-background {
+  background-image: url('./assets/images/noisyGradient.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+}
+
+@media (min-width: 639px) {
+  .noisy-gradient-background {
+    background-image: none;
+  }
+}

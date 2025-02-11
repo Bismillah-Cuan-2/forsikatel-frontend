@@ -9,7 +9,7 @@ import logoutIcon from "../assets/svg/logout-icon.svg"
 const SideBar = () => {
   return (
     <div className="flex min-w-64 flex-col justify-center items-center">
-      <div className="flex flex-col justify-around h-full">
+      <div className="flex flex-col gap-8 justify-around h-full">
         <div className="flex flex-col gap-4">
           <Button Icon={berandaIcon} >Beranda</Button>
           <Button Icon={haditsDankultumIcon}>Hadits dan Kultum</Button>

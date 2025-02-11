@@ -3,7 +3,6 @@ import logoBumn from "../assets/images/logo_bumn.png";
 import logoForsikatel from "../assets/images/logo_forsikatel.png";
 import logoTelkomAkses from "../assets/images/logo_telkom_akses.png";
 import logoTelkom from "../assets/images/logo_telkom.png";
-import { HTMLAttributes } from "react";
 
 interface HeaderLogoProps {
   className? : string
