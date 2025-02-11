@@ -4,8 +4,8 @@ import { Formik, useFormik, } from "formik"
 import HeaderLogo from './HeaderLogo'
 import { validate } from "../util/validation"
 import { Link, useNavigate } from "react-router-dom"
-import RegisterInput from './RegisterInput'
-import searchSVG from '../assets/vectors/search.svg'
+import RegisterInput from './AuthInput'
+import searchSVG from '../assets/svg/search.svg'
 import Button from './Button'
 import { useState } from "react"
 import RegionalPopOut from './RegionalPopOut'
