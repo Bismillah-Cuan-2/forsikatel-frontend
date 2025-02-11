@@ -5,6 +5,7 @@ export default {
       extend: {
         fontFamily: {
           serif: ['Playfair Display', 'serif'], // Set default to Playfair Display
+          source: ['Source Sans Pro', 'sans-serif'],
         },
         colors: {
           neutral : {
