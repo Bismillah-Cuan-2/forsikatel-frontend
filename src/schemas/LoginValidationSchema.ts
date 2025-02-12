@@ -1,9 +1,9 @@
 import * as Yup from "yup";
 
 const validationSchema = Yup.object({
-    fullName: Yup.string().min(3, "Nama lengkap harus memiliki setidaknya 3 karakter")
-    .matches(/^[a-zA-Z\s]+$/, "Nama lengkap hanya boleh berisi huruf dan spasi")
-    .required("Nama lengkap wajib diisi"),
+    fullName: Yup.string()
+    .matches(/^[A-Za-z\s]+ - [A-Za-z\s]+$/, "Format harus 'Nama Istri - Nama Suami'")
+    .required("Nama wajib diisi"),
     phoneNumber: Yup.string()
     .matches(/^[0-9]+$/, "Nomor telepon hanya boleh berisi angka")
     .min(10, "Nomor telepon harus memiliki setidaknya 10 digit")

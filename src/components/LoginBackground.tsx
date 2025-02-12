@@ -17,7 +17,7 @@ const BackgroundLogin = ({ children }: { children: React.ReactNode}) => {
           </div>
           { children }
         </div>
-        <div className="hidden sm:flex justify-center items-center flex-1 p-8">
+        <div className="hidden lg:flex justify-center items-center flex-1 p-8">
           <img src={loginDesktop} className="object-cover" />
         </div>
       </div>

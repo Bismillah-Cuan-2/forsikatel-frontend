@@ -1,62 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-interface UseFetchResult<T> {
+interface FetchResult<T> {
   data: T | null;
   error: string | null;
   loading: boolean;
+  fetchData: (body?: unknown) => Promise<void>;
 }
 
-type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
-
-interface UseFetchParams {
-  endpoint: string;
-  method?: HttpMethod;
-  body?: string | Record<string, unknown>; 
-  headers?: Record<string, string>;
-}
-
-const useFetch = <T>({
-  endpoint,
-  method = "GET",
-  body,
-  headers,
-}: UseFetchParams): UseFetchResult<T> => {
+function useFetch<T>(url: string, method: string = "GET", headers: HeadersInit = {}): FetchResult<T> {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
+  const fetchData = async (body?: unknown) => {
+    setLoading(true);
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          ...headers,
+        },
+        body: body ? JSON.stringify(body) : undefined,
+      });
 
-      try {
-        const response = await fetch(endpoint, {
-          method,
-          body: body ? (typeof body === "object" ? JSON.stringify(body) : body) : undefined, 
-          headers: {
-            "Content-Type": "application/json",
-            ...(headers || {}),
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status} ${response.statusText}`);
-        }
-
-        const jsonData: T = await response.json();
-        setData(jsonData);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An unknown error occurred");
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
-    };
 
-    fetchData();
-  }, [endpoint, method, JSON.stringify(body || {}), JSON.stringify(headers || {})]); // ✅ Ensure proper dependency handling
+      const result = await response.json();
+      setData(result);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  return { data, error, loading };
-};
+  return { data, error, loading, fetchData };
+}
 
 export default useFetch;
