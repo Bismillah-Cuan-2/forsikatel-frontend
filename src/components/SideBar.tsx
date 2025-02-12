@@ -47,7 +47,7 @@ const SideBar = () => {
               className="justify-center font-semibold font-source text-primary-300 rounded-md hover:bg-primary-300 hover:text-white transition-all"
               id="logoutIcon"
               >
-                Keluar Akun
+              <Link to="/login" id="logoutLink"> Keluar Akun </Link>
           </Button>
         </div>
       </div>
