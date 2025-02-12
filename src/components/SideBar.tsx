@@ -41,14 +41,18 @@ const SideBar = () => {
           </NavLink>
         </div>
         <div className={`flex flex-col justify-center px-8 ${classes.logoutIcon}`}>
-          <Button 
-              Icon={logoutIcon} 
-              color="bg-neutral-100" 
-              className="justify-center font-semibold font-source text-primary-300 rounded-md hover:bg-primary-300 hover:text-white transition-all"
-              id="logoutIcon"
+          
+            <Link to="/login" id="logoutLink">
+              <Button 
+                Icon={logoutIcon} 
+                color="bg-neutral-100" 
+                className="justify-center font-semibold font-source text-primary-300 rounded-md hover:bg-primary-300 hover:text-white transition-all"
+                id="logoutIcon"
               >
-              <Link to="/login" id="logoutLink"> Keluar Akun </Link>
-          </Button>
+                Keluar Akun 
+              </Button> 
+            </Link>
+         
         </div>
       </div>
     </div>
