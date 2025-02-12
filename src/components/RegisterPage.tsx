@@ -1,39 +1,50 @@
 import register_img from '../assets/images/register_desktop.png'
 import noisyGradient from '../assets/images/noisyGradient.png'
-import { Formik, useFormik, } from "formik"
+import { Formik, Form,  ErrorMessage, Field} from "formik"
 import HeaderLogo from './HeaderLogo'
-import { validate } from "../util/validation"
 import { Link, useNavigate } from "react-router-dom"
 import RegisterInput from './AuthInput'
 import searchSVG from '../assets/svg/search.svg'
 import Button from './Button'
 import { useState } from "react"
 import RegionalPopOut from './RegionalPopOut'
+import useFetch from '../hooks/useFetch'
+import { API_REGISTER } from '../constant/URL_API'
+import validationSchema from '../schemas/LoginValidationSchema'
 
-interface MyFormValues {
-    namaLengkap: string,
-    nomorHandphone: string,
-    regional: string,
+interface RegisterValues {
+    fullName: string,
+    phoneNumber: string,
+    regional?: string,
+    regionalValue: string,
 
 }
 
+interface LoginResponse {
+    access_token: string;
+    msg: string;
+    refresh_token: string;
+  }
 
-const initialValues: MyFormValues = { namaLengkap: '', nomorHandphone: '',  regional: '' };
+
+
 export const RegisterPage = () => {
     const [showSearch, setShowSearch] = useState(false);
-
+    const { data, error, loading, fetchData } = useFetch<LoginResponse>(API_REGISTER, "POST");
+    const initialValues = { fullName: "", phoneNumber: "",  regional: "", regionalValue: "" };
     const Navigate = useNavigate()
-    const formik = useFormik({
-        initialValues,
-        validate,
-        onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2))
-            handleSubmit(values)
-        }
-    })
 
-    function handleSubmit(e: MyFormValues) {
-        Navigate('/login')
+    async function handleSubmit(e: RegisterValues) {
+        await fetchData({ name_husband: e.fullName, phone_number: e.phoneNumber, regional: e.regionalValue });
+        if (data) {
+            localStorage.setItem("access_token", data.access_token);
+            localStorage.setItem("refresh_token", data.refresh_token);
+            Navigate("/login");
+        }
+
+        if (error) {
+            alert(error);
+          }
         console.log(e)
     }
 
@@ -68,68 +79,46 @@ export const RegisterPage = () => {
                     <div>
                         <Formik
                             initialValues={initialValues}
-                            validate={validate}
-                            onSubmit={(values, { setSubmitting }) => {
-                                setTimeout(() => {
-                                    alert(JSON.stringify(values, null, 2))
-                                    setSubmitting(false)
-                                }, 400)
-                            }}
+                            validationSchema={validationSchema}
+                            onSubmit={handleSubmit}
                             >
-                            <form onSubmit={formik.handleSubmit} className="w-full">
+                        {({ isSubmitting, values, setFieldValue }) => (
+                            <Form className="w-full">
                                 <div className="flex flex-col gap-5 mb-4">
                                     <RegisterInput 
-                                        id="namaLengkap" 
+                                        id="fullName" 
                                         label="Nama Lengkap" 
                                         type="text" 
-                                        placeholder='Masukkan nama sesuai identitas'
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={formik.values.namaLengkap}    
+                                        placeholder='Masukkan nama sesuai identitas (Nama Istri - Nama Suami)'
+                                        value={values.fullName}   
                                     />
-                                    {/* {formik.touched.username && formik.errors.username ? 
-                                    <p className="text-red-500">{formik.errors.username}</p> : null} */}
-
                                     <RegisterInput 
-                                        id="nomorHandphone" 
+                                        id="phoneNumber" 
                                         label="Nomor Handphone" 
-                                        type="number" 
+                                        type="text" 
                                         placeholder='Gunakan nomor yang aktif'
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={formik.values.nomorHandphone}    
+                                        value={values.phoneNumber} 
                                     />
-                                    {/* { formik.touched.password && formik.errors.password ? 
-                                    <p className="text-red-500">{formik.errors.password}</p> : null} */}
-
                                     <div>
                                         <img src={searchSVG} alt="searchLogo" className='absolute mt-9 ml-2'/>
                                         <div className="w-full flex flex-col gap-2">
                                             <label className="text-sm font-normal font-source text-neutral-900" htmlFor="regional">Regional</label>
-                                            <input 
+                                            <Field 
                                                 className="text-sm pr-2 pl-10 h-10 bg-neutral-100 font-source border-b-neutral-900 border-b-2" 
                                                 id="regional" 
                                                 type="text" 
                                                 placeholder='Pilih kantor regionalmu'
-                                                onChange={(value) => {
-                                                    setShowSearch(true);
-                                                    formik.handleChange("regional")(value);}}
+                                                // onChange={(e: ChangeEvent<HTMLInputElement>) => {setShowSearch(true), setFieldValue("regional", e.target.value)}}
                                                 onClick={() => setShowSearch(true)}    
-                                                onBlur={() => {
-                                                    setTimeout(() => {
-                                                        setShowSearch(false);
-                                                    }, 150);
-                                                    formik.handleBlur("regional")
-                                                    console.log(showSearch)
-                                                }}
-                                                value={formik.values.regional}
+                                                value={values.regional}
                                             />
+                                            <ErrorMessage name="regional" component="div" className="text-sm text-primary-300" />
                                         </div>
                                         {showSearch && 
                                             <RegionalPopOut 
-                                                searchRegional={formik.values.regional} 
+                                                searchRegional={values.regional} 
                                                 OnBlur={() => setShowSearch(false)} 
-                                                OnSelected={(e) => formik.setFieldValue("regional", e.regional)} 
+                                                OnSelected={(e) => {setFieldValue("regional", e.regional), setFieldValue("regionalValue", e.values)}} 
                                             /> 
                                         }
                                     </div>
@@ -138,8 +127,9 @@ export const RegisterPage = () => {
                                                 className="justify-center px-3 py-2 rounded-none font-bold text-base font-source"
                                                 color='bg-primary-300  text-white w-full hover:bg-primary-200 '
                                                 type="submit"
+                                                disabled={isSubmitting}
                                             >
-                                                Daftar Sekarang
+                                                {loading ? "Loading..." : "Daftar Sekarang"}
                                             </Button>
                                     </div>
 
@@ -149,7 +139,8 @@ export const RegisterPage = () => {
                                     </p>
                                 </div>
                                 
-                            </form>
+                            </Form>
+                            )}
                         </Formik>
                     </div>
                 </div>
