@@ -9,7 +9,7 @@ const BackgroundLogin = ({ children }: { children: React.ReactNode}) => {
       <div className="sm:flex">
         <div className="flex flex-col justify-between items-center py-24 px-16 gap-14 w-full h-full bg-neutral-50 rounded-ss-[100px] sm:flex-1">
           <div className="flex justify-center">
-            <HeaderLogo className="w-[2rem] sm:w-full" widthHeader="w-full"/>
+            <HeaderLogo imgSize="w-12 h-8"/>
           </div>
           <div className="sm:w-full">
             <h1 className="text-3xl font-bold text-primary-300">Selamat Datang!</h1>
