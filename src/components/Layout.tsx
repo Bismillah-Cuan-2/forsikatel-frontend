@@ -19,7 +19,7 @@ const Layout = ({ children }: { children: React.ReactNode}) => {
             <SideBar />
           </SideBarContextProvider>
         }
-        <main className="flex flex-col items-center gap-8 w-full">
+        <main className="flex flex-col items-center gap-8 w-full md:pr-14 px-7">
           {(isDesktop && showSideBar) && <HeaderContent />}
           {children}
         </main>

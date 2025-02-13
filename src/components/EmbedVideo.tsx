@@ -36,17 +36,15 @@ const EmbedVideo = ({ videoId, title, channel }: { videoId: string, title?: stri
         <div className="bg-neutral-500 rounded-2xl">
             <iframe
                 id="ytplayer"
-                className="rounded-t-2xl"
+                className="rounded-t-2xl w-full 2xl:w-[45rem] 2xl:h-[20rem] md:h-[28rem] h-[15rem]"
                 typeof="text/html"
-                width={"100%"}
-                height={"400"}
                 src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoId)}`}
                 allow="accelerometer; autoplay; picture-in-picture"
                 allowFullScreen
             >
             </iframe>
         </div>
-        <div className="px-8 pt-3">
+        <div className="px-10 pt-3">
             <h3 className="font-normal font-source text-lg text-neutral-500">{channel || "Loading..."}</h3>
             <h2 className="text-2xl font-semibold text-neutral-900">{title || "Loading..."}</h2>
         </div>
