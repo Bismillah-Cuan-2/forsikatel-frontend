@@ -8,7 +8,8 @@ const validationSchema = Yup.object({
     .matches(/^[0-9]+$/, "Nomor telepon hanya boleh berisi angka")
     .min(10, "Nomor telepon harus memiliki setidaknya 10 digit")
     .max(15, "Nomor telepon tidak boleh lebih dari 15 digit")
-    .required("Nomor telepon wajib diisi")
+    .required("Nomor telepon wajib diisi"),
+    regional: Yup.string().required("Regional wajib diisi"),
 });
 
 export default validationSchema;
