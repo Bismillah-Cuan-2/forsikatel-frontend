@@ -10,7 +10,7 @@ import { useState } from "react"
 import RegionalPopOut from './RegionalPopOut'
 import useFetch from '../hooks/useFetch'
 import { API_REGISTER } from '../constant/URL_API'
-import validationSchema from '../schemas/LoginValidationSchema'
+import validationSchema from '../schemas/RegisterValidationSchema'
 
 interface RegisterValues {
     fullName: string,
@@ -66,7 +66,7 @@ export const RegisterPage = () => {
             <section className='relative flex flex-col px-2 2xl:w-full lg:py-[6rem] 2xl:pt-[10rem] lg:pr-[5rem] 2xl:px-[6rem] lg:left-[-2rem] gap-5'>
                 <div className='flex flex-col  gap-3'>
                     <div className='flex justify-center'>
-                        <HeaderLogo className="w-[1.6rem] md:w-full" widthHeader='w-auto md:w-[29rem] justify-center' />
+                    <HeaderLogo imgSize="w-12 h-8"/>
                     </div>          
                     <div className='mt-[1rem]'>
                         <h2 className='text-[2.5rem] font-bold text-primary-300'>Mulai Perjalanan Mengajimu!</h2>
