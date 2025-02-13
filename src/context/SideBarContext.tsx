@@ -20,7 +20,7 @@ export const SideBarContextProvider: React.FC<{ children: ReactNode }> = ({ chil
   return (
     <SideBarContext.Provider value={{ isOpen, toggleSideBar }}>
         {isMobile && 
-          <div className="fixed top-0 w-screen flex justify-between items-center border-neutral-200 border-b-2 ">
+          <div className="fixed top-0 w-screen flex justify-between items-center border-neutral-200 border-b-2 z-[10]">
             <Button onClick={toggleSideBar} Icon={moreIcon}/>
             <HeaderLogo imgSize="w-10 h-8" classHeader="p-2"/>
           </div>
