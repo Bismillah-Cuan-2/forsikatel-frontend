@@ -40,6 +40,22 @@ body {
   width: 100vw;
 }
 
+.record-gradient-background {
+  background: linear-gradient(215deg, #FFF -39.39%, #FF9DA1 99.57%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.line-div {
+  border-right: 0.5px solid #fff;
+  box-sizing: border-box;
+}
+
+.box-shadow {
+  box-shadow: -2px 4px 4px 0px rgba(0,0,0,0.1);
+}
+
 @media (min-width: 639px) {
   .noisy-gradient-background {
     background-image: none;
