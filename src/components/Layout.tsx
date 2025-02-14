@@ -15,13 +15,13 @@ const Layout = ({ children }: { children: React.ReactNode}) => {
     const isMobile =  useMediaQuery(MOBILE);
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 w-full h-screen">
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-screen">
         {showSideBar && 
           <SideBarContextProvider>
             <SideBar />
           </SideBarContextProvider>
         }
-        <main className="flex flex-col items-center gap-8 w-full md:pr-14 px-7">
+        <main className="flex flex-col items-center gap-8 w-full md:pr-14 px-2">
           {(isDesktop && showSideBar) && <HeaderContent />}
           <div className="mt-14 w-full">
             {children}

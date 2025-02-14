@@ -41,7 +41,7 @@ const SetorNgajiTable = () => {
             <h2 className="text-3xl font-bold ">Riwayat Setoran Mengaji</h2>
             <p className="font-source">Cek Perjalanan mengajimu sejauh ini!</p>
         </div>
-        <div>
+        <div className="max-h-96 overflow-y-auto">
             <Table data={userData} columns={userColumns} />
         </div>
     </div>
