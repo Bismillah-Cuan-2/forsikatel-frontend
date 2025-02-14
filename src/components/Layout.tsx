@@ -3,7 +3,8 @@ import { useLocation } from "react-router-dom"
 import SideBar from "./SideBar";
 import { SideBarContextProvider } from "../context/SideBarContext";
 import HeaderContent from "./HeaderContent";
-import { DESKTOP } from "../constant/DEVICES_SIZE";
+import { DESKTOP, MOBILE } from "../constant/DEVICES_SIZE";
+import Footer from "./Footer";
 import { useMediaQuery } from "@react-hook/media-query";
 
 const Layout = ({ children }: { children: React.ReactNode}) => {
@@ -11,6 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode}) => {
     const noSideBarRoutes = ["/login", "/register"];
     const showSideBar = !noSideBarRoutes.includes(location.pathname);
     const isDesktop = useMediaQuery(DESKTOP);
+    const isMobile =  useMediaQuery(MOBILE);
 
   return (
     <div className="flex flex-col md:flex-row gap-4 w-full h-screen">
@@ -21,8 +23,11 @@ const Layout = ({ children }: { children: React.ReactNode}) => {
         }
         <main className="flex flex-col items-center gap-8 w-full md:pr-14 px-7">
           {(isDesktop && showSideBar) && <HeaderContent />}
-          {children}
+          <div className="mt-14 w-full">
+            {children}
+          </div>
         </main>
+        {isMobile && <Footer/>}
     </div>
   )
 }

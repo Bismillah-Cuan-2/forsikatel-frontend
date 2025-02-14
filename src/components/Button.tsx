@@ -7,9 +7,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children="", color="bg-neutral-50", className, Icon, ...props }) => {
+const Button: React.FC<ButtonProps> = ({ children, color="bg-neutral-50", className, Icon, ...props }) => {
   return (
-    <button className={`flex items-center px-4 py-2 ${children ? "gap-4" : ""} ${color} ${className || ""}`} {...props}>
+    <button className={`flex items-center px-4 py-2 font-source ${color} ${className || ""}`} {...props}>
         <span>{ Icon && <img src={Icon} />}</span>
         <span>{ children }</span>
     </button>
