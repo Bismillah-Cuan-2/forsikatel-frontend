@@ -15,27 +15,27 @@ const SideBarContent = () => {
     <div className="flex flex-col gap-8 justify-around h-full">
         <div className={`flex flex-col gap-4 ${classes.sideBarMenu}`}>
             <NavLink to="/" className={getNavLinkClass}>
-                <Button Icon={berandaIcon} color="transparent" className="font-source font-semibold">  
+                <Button Icon={berandaIcon} color="transparent" className="font-source font-semibold gap-2">  
                     Beranda
                 </Button>
             </NavLink>    
             <NavLink to="/haditskultum" className={getNavLinkClass}>
-                <Button Icon={haditsDankultumIcon} color="transparent" className="font-source font-semibold">
+                <Button Icon={haditsDankultumIcon} color="transparent" className="font-source font-semibold gap-2">
                     Hadits dan Kultum
                 </Button>
             </NavLink>
             <NavLink to="/progress" className={getNavLinkClass}>
-            <Button Icon={progressHarianIcon} color="transparent" className="font-source font-semibold">
+            <Button Icon={progressHarianIcon} color="transparent" className="font-source font-semibold gap-2">
                 Progress Harian
             </Button>
             </NavLink>
             <NavLink to="/rekap" className={getNavLinkClass}>
-            <Button Icon={rekapIcon} color="transparent" className="font-source font-semibold">
+            <Button Icon={rekapIcon} color="transparent" className="font-source font-semibold gap-2">
                 Rekapitulasi Mengaji
             </Button>
             </NavLink>
             <NavLink to="/setorngaji" className={getNavLinkClass}>
-                <Button Icon={setoranIcon} color="transparent" className="font-source font-semibold">
+                <Button Icon={setoranIcon} color="transparent" className="font-source font-semibold gap-2">
                 Setoran Mengaji
                 </Button>
             </NavLink>
@@ -46,7 +46,7 @@ const SideBarContent = () => {
             <Button 
                 Icon={logoutIcon} 
                 color="bg-neutral-100" 
-                className="justify-center font-semibold font-source text-primary-300 rounded-md hover:bg-primary-300 hover:text-white transition-all"
+                className="justify-center gap-2 font-semibold font-source text-primary-300 rounded-md hover:bg-primary-300 hover:text-white transition-all" 
                 id="logoutIcon"
             >
                 Keluar Akun 

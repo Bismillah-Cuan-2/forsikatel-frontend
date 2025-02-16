@@ -1,4 +1,6 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import Card from './Card';
+import Header2 from "./Header2";
 
 const data = [
     { name: "Senin", thisWeek: 40, lastWeek: 50 },
@@ -12,12 +14,13 @@ const data = [
 
 const SetorMengajiChart = () => {
   return (
-    <div className="flex flex-col gap-2">
-        <div className="flex flex-col text-neutral-900">
-            <h2 className="text-3xl font-bold ">Progress Mengaji</h2>
-            <p className="font-source">Pantau perjalananmu menuju khatam!</p>
-        </div>
-        <div className="bg-white rounded-3xl flex flex-col gap-2 justify-center items-center shadow-component p-4 font-source text-sm">
+    <div className="flex flex-col gap-2 w-full">
+        <Header2
+            title="Progress Mengaji"
+            text="Pantau perjalananmu menuju khatam!"
+            className="px-4"
+        />
+        <Card className="flex flex-col gap-2 justify-center items-center p-4 font-source text-sm h-full">
             <h3 className="text-neutral-400">
                 Terus pertahankan ritmemu dan capai target khatam!
             </h3>
@@ -54,7 +57,7 @@ const SetorMengajiChart = () => {
                     />
                 </LineChart>
             </ResponsiveContainer>
-        </div>
+        </Card>
     </div>
   )
 }
