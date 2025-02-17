@@ -1,5 +1,6 @@
 import { useMediaQuery } from "@react-hook/media-query"
 import { TABLET, DESKTOP } from "../constant/DEVICES_SIZE"
+import ProgressKhatamDashboard from "../components/ProgressKhatamDashboard";
 
 const Dashboard = () => {
   const isTablet = useMediaQuery(TABLET);
@@ -18,7 +19,7 @@ const Dashboard = () => {
           </div>
           <div className="flex gap-4 h-16 justify-between w-full">
             <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full w-full">
-              Progress Khatam
+              <ProgressKhatamDashboard />
             </div>
             <div className="flex flex-col w-full gap-2">
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full">
@@ -63,7 +64,7 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col gap-4 p-4 rounded-lg w-1/3 h-full justify-center items-center">
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-3/5 w-full">
-                Progress Khatam
+                <ProgressKhatamDashboard />
               </div>
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full w-full">
                 Hadits Hari Ini
