@@ -17,16 +17,17 @@ const SetorNgajiInput = () => {
   const { data, error, loading, fetchData } = useFetch<SetorNgajiResponse>(
     API_SETOR_NGAJI, 
     "POST", 
-    {Authorization: `Bearer ${localStorage.getItem("access_token")}`});
+    { Authorization: `Bearer ${localStorage.getItem("access_token")}`}
+  );
 
   const handleSubmit = async (values: SetorNgajiInputValue) => {
-    await fetchData({ juz_read: values.juz });
+    await fetchData({ juz_read: Number(values.juz) });
     if (data) {
-      console.log(data, error)
+      console.log(data.msg)
     }
 
     if (error) {
-      alert(error)
+      alert(error);
     }
   }
 
