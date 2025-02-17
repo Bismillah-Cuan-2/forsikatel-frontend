@@ -1,7 +1,7 @@
 import MushafSajaddah from "./MushafSajaddah"
 import MushafTasbih from "../assets/images/mushaf_tasbih.png"
 import Sajaddah from "../assets/images/sajaddah.png"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import useFetch from "../hooks/useFetch"
 import EmbedVideo from "./EmbedVideo"
 import { API_HADIST_KULTUM } from "../constant/URL_API"
@@ -24,41 +24,31 @@ type hadistKultumProps = {
 }
 
 const headers = {
-    Authorization: `${localStorage.getItem("access_token")}`,
+    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
 }
 const HadistKultumBg = ({children}: {children: React.ReactNode}) => {
     const isMobile = useMediaQuery(MOBILE);
     const { data, error, loading, fetchData } = useFetch<hadistKultumProps>(API_HADIST_KULTUM, "GET",headers );
-    const [hadistKultumData, setHadistKultumData] = useState({
-        hadist : "",
-        kultum: ""
-    });
-    useEffect(() => {
-        async function handleFetch() {
-            await fetchData();
-            if(data){
-                setHadistKultumData({kultum: data.hadist_kultum.kultum, hadist: data.hadist_kultum.hadist});
-                console.log(hadistKultumData);
-            }
-            if(error){
-                alert(error);
-            } 
-        }
 
-        handleFetch()
+    useEffect(() => {
+            fetchData();
+
+            if (error) {
+                alert(error);
+            }
     }, [])
     return (
         <>
-            <section className="flex lg:flex-row flex-col md:gap-0 gap-10 items-center w-full lg:mt-5 mt-20">
+            <section className="flex lg:flex-row flex-col pr-[2.1rem] md:gap-0 gap-10 items-center lg:items-start w-full lg:mt-5 mt-5">
                 {/* Hadits dan kultum headline */}
-                <div className="flex flex-col md:gap-2 2xl:w-[40%] lg:w-[30%] w-full md:px-0 px-[4rem]">
-                    <h2 className="lg:text-4xl text-[28px] font-bold text-primary-300 text-center 2xl:text-start">
+                <div className="flex flex-col md:gap-2 2xl:w-[40%] lg:w-[30%] w-full md:px-4 px-[4rem]">
+                    <h2 className="lg:text-4xl text-[28px] font-bold text-primary-300 text-center lg:text-start">
                         Hadist dan Kultum Hari Ini
                     </h2>
                     <span className="font-semibold font-source text-neutral-900 md:text-base text-xs text-center lg:text-start">
                         Temukan inspirasi dan ilmu baru setiap hari!
                     </span>
-                    <div className="hidden items-center mt-2 lg:flex lg:flex-col">
+                    <div className="hidden items-center mt-5 lg:flex lg:flex-col">
                         <MushafSajaddah />
                     </div>
 
@@ -75,16 +65,16 @@ const HadistKultumBg = ({children}: {children: React.ReactNode}) => {
                         Tonton Kultum Hari Ini
                     </h2>
                     <div className="bg-neutral-50 rounded-2xl pb-[4rem] drop-shadow-[0_10px_10px_rgba(0,0,0,0.25)]">
-                       {loading ? "Loading..." : <EmbedVideo videoId={hadistKultumData.kultum} />} 
+                       {loading ? "Loading..." : <EmbedVideo videoId={"https://youtu.be/XEYkMaxZmIE?si=jShtgkb-RAXHGvA3"} />} 
                     </div>
                 </div>
             </section>
-
+                {children}
             {/* Hadist hari ini */}
-            <section className="flex flex-col w-full gap-2 2xl:pb-[5rem]">
+            <section className="flex flex-col w-full gap-2 2xl:pb-[5rem] pr-[2.1rem]">
                 <h2 className="text-2xl hidden md:block font-semibold text-neutral-900">Hadist Hari Ini</h2>
-                <div className=" bg-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.25)] rounded-2xl px-3 py-3 min-h-[10rem]">
-                    <p>{hadistKultumData.hadist}</p>
+                <div className=" bg-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.25)] rounded-2xl px-5 py-3 min-h-[10rem]">
+                    <p>{data?.hadist_kultum.hadist || loading}</p>
                 </div>
             </section>
         </>
