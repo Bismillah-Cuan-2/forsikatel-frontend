@@ -1,12 +1,12 @@
 
 interface Header1Props {
-    title: string
-    text: string
+    title: string | React.ReactNode
+    text: string | React.ReactNode
 }
 const Header1: React.FC<Header1Props> = ({ title, text }) => {
   return (
     <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold text-primary-300">
+        <h1 className="text-3xl xl:text-4xl   font-bold text-primary-300">
             { title }
         </h1>
         <p className="font-source font-semibold text-neutral-900">

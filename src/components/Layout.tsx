@@ -23,10 +23,10 @@ const Layout = ({ children }: { children: React.ReactNode}) => {
         }
         <main className="flex flex-col items-center gap-8 overflow-scroll w-full  lg:pb-8">
           {(isDesktop && showSideBar) && <HeaderContent />}
-          <div className="lg:mt-0 mt-14 w-full">
+          <div className={`lg:mt-0 ${showSideBar ? "mt-14" : "mt-0"}  w-full`}>
             {children}
           </div>
-        {isMobile && <Footer/>}
+        {(isMobile && showSideBar) && <Footer/>}
         </main>
     </div>
   )

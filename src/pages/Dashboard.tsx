@@ -1,52 +1,49 @@
 import { useMediaQuery } from "@react-hook/media-query"
-import { TABLET, DESKTOP } from "../constant/DEVICES_SIZE"
+import { MOBILE, DESKTOP } from "../constant/DEVICES_SIZE"
+import DashboardHeader from "../components/DashboardHeader";
 import ProgressKhatamDashboard from "../components/ProgressKhatamDashboard";
 
 const Dashboard = () => {
-  const isTablet = useMediaQuery(TABLET);
+  const isMobile = useMediaQuery(MOBILE);
   const isDesktop = useMediaQuery(DESKTOP);
 
   return (
     <>
-      {isTablet && 
-      <>
-        <div className="flex flex-col w-full h-full items-center px-4 gap-4">
-          <div className="bg-white flex justify-center items-center h-16 w-full rounded-3xl box-shadow">
-            Header
-          </div>
-          <div className="bg-white flex justify-center items-center h-16 w-full rounded-3xl box-shadow">
-            Kalender
-          </div>
-          <div className="flex gap-4 h-16 justify-between w-full">
-            <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full w-full">
+      {isMobile && 
+        <>
+          <div className="flex flex-col w-full h-full items-center px-4 gap-4">
+            <DashboardHeader />
+            <div className="bg-white flex justify-center items-center h-16 w-full rounded-3xl box-shadow">
+              Kalender
+            </div>
+            <div className="flex gap-4 h-16 justify-between w-full">
+              <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full w-full">
               <ProgressKhatamDashboard />
-            </div>
-            <div className="flex flex-col w-full gap-2">
-              <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full">
-                Hadits Hari Ini
               </div>
-              <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full">
-                Regional
+              <div className="flex flex-col w-full gap-2">
+                <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full">
+                  Hadits Hari Ini
+                </div>
+                <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full">
+                  Regional
+                </div>
               </div>
             </div>
+            <div className="bg-white flex justify-center items-center h-16 w-full rounded-3xl box-shadow">
+              Statistik Aktivitas Mengaji (Coming Soon✨)
+            </div>
+            <div className="bg-white flex justify-center items-center h-16 w-full rounded-3xl box-shadow">
+              Aktivitas Mengaji Terbaru
+            </div>
           </div>
-          <div className="bg-white flex justify-center items-center h-16 w-full rounded-3xl box-shadow">
-            Statistik Aktivitas Mengaji (Coming Soon✨)
-          </div>
-          <div className="bg-white flex justify-center items-center h-16 w-full rounded-3xl box-shadow">
-            Aktivitas Mengaji Terbaru
-          </div>
-        </div>
-      </>
+        </>
       }
 
       {isDesktop && 
         <>
           <div className="flex flex-row w-full h-full justify-between px-4 gap-4">
             <div className="bg-neutral-100 flex flex-col rounded-3xl w-11/12 h-full justify-center items-center p-4 gap-4">
-              <div className="bg-white flex justify-center items-center h-40 w-full rounded-3xl box-shadow">
-                Header
-              </div>
+              <DashboardHeader />
               <div className="bg-white flex justify-center items-center h-28 w-full rounded-3xl box-shadow">
                 Kalender
               </div>
