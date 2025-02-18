@@ -3,6 +3,8 @@ import { MOBILE, DESKTOP } from "../constants/DEVICES_SIZE";
 import DashboardHeader from "../components/DashboardHeader";
 import DashboardKalender from "../components/DashboardKalender";
 import ProgressKhatamDashboard from "../components/ProgressKhatamDashboard";
+import DashboarAktivitasMengaji from "../components/DashboarAktivitasMengaji";
+
 
 const Dashboard = () => {
   const isMobile = useMediaQuery(MOBILE);
@@ -31,9 +33,7 @@ const Dashboard = () => {
             <div className="bg-white flex justify-center items-center h-16 w-full rounded-3xl box-shadow">
               Statistik Aktivitas Mengaji (Coming Soon✨)
             </div>
-            <div className="bg-white flex justify-center items-center h-16 w-full rounded-3xl box-shadow">
-              Aktivitas Mengaji Terbaru
-            </div>
+            <DashboarAktivitasMengaji />
           </div>
         </>
       }
@@ -52,9 +52,7 @@ const Dashboard = () => {
                   Statistik Aktivitas Mengaji (Coming Soon✨)
                 </div>
               </div>
-              <div className="bg-white flex justify-center items-center h-48 w-full rounded-3xl box-shadow">
-                Aktivitas Mengaji Terbaru
-              </div>
+              <DashboarAktivitasMengaji />
             </div>
             <div className="flex flex-col gap-4 p-4 rounded-lg w-1/3 h-full justify-center items-center">
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-3/5 w-full">
