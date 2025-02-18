@@ -1,11 +1,8 @@
 import { useMediaQuery } from "@react-hook/media-query";
 import { MOBILE, DESKTOP } from "../constants/DEVICES_SIZE";
 import DashboardHeader from "../components/DashboardHeader";
-<<<<<<< HEAD
 import DashboardKalender from "../components/DashboardKalender";
-=======
 import ProgressKhatamDashboard from "../components/ProgressKhatamDashboard";
->>>>>>> 812a463772b6479aac32556ddf6889d63cc99183
 
 const Dashboard = () => {
   const isMobile = useMediaQuery(MOBILE);
