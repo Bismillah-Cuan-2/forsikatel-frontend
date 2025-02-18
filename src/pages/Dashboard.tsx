@@ -8,6 +8,9 @@ import { DashboardResponse } from "../constants/DASHBORAD_RESPONSES";
 import { API_DASHBOARD } from "../constants/URL_API";
 import useFetch from "../hooks/useFetch";
 import { useEffect } from "react";
+import HadistHariIniDashBoard from "../components/HadistHariIniDashBoard";
+import RegionalJuzTerbanyakDashboard from "../components/RegionalJuzTerbanyakDashboard";
+
 
 const Dashboard = () => {
   const isMobile = useMediaQuery(MOBILE);
@@ -32,11 +35,11 @@ const Dashboard = () => {
               <ProgressKhatamDashboard />
               </div>
               <div className="flex flex-col w-full gap-2">
-                <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full">
-                  Hadits Hari Ini
+                <div className=" flex justify-center items-center rounded-2xl box-shadow ">
+                  <HadistHariIniDashBoard isMobile={isMobile} />
                 </div>
-                <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full">
-                  Regional
+                <div className="flex justify-center items-center rounded-3xl h-full">
+                  <RegionalJuzTerbanyakDashboard />
                 </div>
               </div>
             </div>
@@ -59,8 +62,8 @@ const Dashboard = () => {
               <DashboardHeader />
               { data && <DashboardKalender data={data.kalender}/> }
               <div className="flex w-full gap-4 justify-between items-stretch">
-                <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-64 w-1/3">
-                  Regional
+                <div className="justify-center items-center rounded-3xl h-64 w-1/3">
+                  <RegionalJuzTerbanyakDashboard />
                 </div>
                 <div className="bg-white flex justify-center items-center h-64 w-full rounded-3xl box-shadow">
                   Statistik Aktivitas Mengaji (Coming Soon✨)
@@ -76,8 +79,8 @@ const Dashboard = () => {
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-3/5 w-full">
                 <ProgressKhatamDashboard />
               </div>
-              <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full w-full">
-                Hadits Hari Ini
+              <div className="bg-white flex justify-center rounded-3xl box-shadow h-full w-full">
+                <HadistHariIniDashBoard isDesktop={isDesktop} />
               </div>
             </div>
           </div>
