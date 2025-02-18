@@ -2,19 +2,15 @@ import {getCurrentDay, getCurrentMonth, getCurrentYear, getCurrentWeekDates } fr
 import Header2 from "./Header2";
 import { DAYS } from "../constants/DATES";
 import DotCircle from "./DotCircle";
-import useFetch from "../hooks/useFetch";
-import { API_DASHBOARD } from "../constants/URL_API";
-import { useEffect } from "react";
+import { Calendar } from "../constants/DASHBORAD_RESPONSES";
 
-const DashboardKalender = () => {
-    const { data, fetchData } = useFetch<any>(API_DASHBOARD, "GET", {Authorization: `Bearer ${localStorage.getItem("access_token")}`});
-    const currentWeekDates = getCurrentWeekDates();
+interface DashboardKalenderProps {
+    data: Calendar;
+}
+
+const DashboardKalender: React.FC<DashboardKalenderProps> = ({ data }) => {
     const currentDay = getCurrentDay();
-
-    useEffect(() => {
-        fetchData();
-        console.log(data);
-    }, [])
+    const currentWeekDates = getCurrentWeekDates();
 
   return (
     <div className="flex flex-col gap-1 w-full">
@@ -31,7 +27,7 @@ const DashboardKalender = () => {
                         <p className="font-normal text-2xl xl:text-3xl">
                             {date}
                         </p>
-                        { data?.kalender[DAYS[index]] && <DotCircle size="h-2 w-2"/> }
+                        { data[DAYS[index]] && <DotCircle size="h-2 w-2"/> }
                     </div>
                 ))
             }
