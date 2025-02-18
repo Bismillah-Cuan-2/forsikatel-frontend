@@ -1,7 +1,11 @@
 import { useMediaQuery } from "@react-hook/media-query";
 import { MOBILE, DESKTOP } from "../constants/DEVICES_SIZE";
 import DashboardHeader from "../components/DashboardHeader";
+<<<<<<< HEAD
 import DashboardKalender from "../components/DashboardKalender";
+=======
+import ProgressKhatamDashboard from "../components/ProgressKhatamDashboard";
+>>>>>>> 812a463772b6479aac32556ddf6889d63cc99183
 
 const Dashboard = () => {
   const isMobile = useMediaQuery(MOBILE);
@@ -16,7 +20,7 @@ const Dashboard = () => {
             <DashboardKalender />
             <div className="flex gap-4 h-16 justify-between w-full">
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full w-full">
-                Progress Khatam
+              <ProgressKhatamDashboard />
               </div>
               <div className="flex flex-col w-full gap-2">
                 <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full">
@@ -57,7 +61,7 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col gap-4 p-4 rounded-lg w-1/3 h-full justify-center items-center">
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-3/5 w-full">
-                Progress Khatam
+                <ProgressKhatamDashboard />
               </div>
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full w-full">
                 Hadits Hari Ini

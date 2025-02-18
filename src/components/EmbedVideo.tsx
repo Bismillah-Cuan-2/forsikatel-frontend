@@ -1,6 +1,6 @@
 
 
-const EmbedVideo = ({ videoId, title, channel }: { videoId: string, title?: string, channel?: string}) => {
+const EmbedVideo = ({ videoId, title, channel }: { videoId: string | undefined, title?: string, channel?: string}) => {
     // const [channel, setChannel] = useState("Loading...");
 
     
@@ -38,7 +38,7 @@ const EmbedVideo = ({ videoId, title, channel }: { videoId: string, title?: stri
                 id="ytplayer"
                 className="rounded-t-2xl w-full 2xl:w-[45rem] 2xl:h-[20rem] md:h-[28rem] h-[15rem]"
                 typeof="text/html"
-                src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoId)}`}
+                src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoId || "")}`}
                 allow="accelerometer; autoplay; picture-in-picture"
                 allowFullScreen
             >

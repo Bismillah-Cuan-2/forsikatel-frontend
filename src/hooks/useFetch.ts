@@ -30,6 +30,7 @@ function useFetch<T>(url: string, method: string = "GET", headers: HeadersInit =
 
       const result = await response.json();
       setData(result);
+
     } catch (err) {
       setError((err as Error).message);
     } finally {
