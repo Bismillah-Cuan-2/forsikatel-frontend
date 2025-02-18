@@ -6,7 +6,7 @@ type regionalListProps = {
     regional: string,
     values: string,
 }
-const regionalList: regionalListProps[] = [
+export const regionalList: regionalListProps[] = [
     {
         id: 1,
         regional: "Head Office",

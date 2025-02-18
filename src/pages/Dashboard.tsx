@@ -4,6 +4,8 @@ import DashboardHeader from "../components/DashboardHeader";
 import DashboardKalender from "../components/DashboardKalender";
 import ProgressKhatamDashboard from "../components/ProgressKhatamDashboard";
 import DashboarAktivitasMengaji from "../components/DashboarAktivitasMengaji";
+import HadistHariIniDashBoard from "../components/HadistHariIniDashBoard";
+import RegionalJuzTerbanyakDashboard from "../components/RegionalJuzTerbanyakDashboard";
 
 
 const Dashboard = () => {
@@ -17,16 +19,16 @@ const Dashboard = () => {
           <div className="flex flex-col w-full h-full items-center px-4 gap-4">
             <DashboardHeader />
             <DashboardKalender />
-            <div className="flex gap-4 h-16 justify-between w-full">
+            <div className="flex gap-4 justify-between w-full">
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full w-full">
               <ProgressKhatamDashboard />
               </div>
               <div className="flex flex-col w-full gap-2">
-                <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full">
-                  Hadits Hari Ini
+                <div className=" flex justify-center items-center rounded-2xl box-shadow ">
+                  <HadistHariIniDashBoard isMobile={isMobile} />
                 </div>
-                <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full">
-                  Regional
+                <div className="flex justify-center items-center rounded-3xl h-full">
+                  <RegionalJuzTerbanyakDashboard />
                 </div>
               </div>
             </div>
@@ -45,8 +47,8 @@ const Dashboard = () => {
               <DashboardHeader />
               <DashboardKalender />
               <div className="flex w-full gap-4 justify-between items-stretch">
-                <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-64 w-1/3">
-                  Regional
+                <div className="justify-center items-center rounded-3xl h-64 w-1/3">
+                  <RegionalJuzTerbanyakDashboard />
                 </div>
                 <div className="bg-white flex justify-center items-center h-64 w-full rounded-3xl box-shadow">
                   Statistik Aktivitas Mengaji (Coming Soon✨)
@@ -58,8 +60,8 @@ const Dashboard = () => {
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-3/5 w-full">
                 <ProgressKhatamDashboard />
               </div>
-              <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full w-full">
-                Hadits Hari Ini
+              <div className="bg-white flex justify-center rounded-3xl box-shadow h-full w-full">
+                <HadistHariIniDashBoard isDesktop={isDesktop} />
               </div>
             </div>
           </div>
