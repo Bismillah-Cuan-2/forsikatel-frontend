@@ -1,6 +1,7 @@
-import { useMediaQuery } from "@react-hook/media-query"
-import { MOBILE, DESKTOP } from "../constant/DEVICES_SIZE"
+import { useMediaQuery } from "@react-hook/media-query";
+import { MOBILE, DESKTOP } from "../constants/DEVICES_SIZE";
 import DashboardHeader from "../components/DashboardHeader";
+import DashboardKalender from "../components/DashboardKalender";
 import ProgressKhatamDashboard from "../components/ProgressKhatamDashboard";
 
 const Dashboard = () => {
@@ -13,9 +14,7 @@ const Dashboard = () => {
         <>
           <div className="flex flex-col w-full h-full items-center px-4 gap-4">
             <DashboardHeader />
-            <div className="bg-white flex justify-center items-center h-16 w-full rounded-3xl box-shadow">
-              Kalender
-            </div>
+            <DashboardKalender />
             <div className="flex gap-4 h-16 justify-between w-full">
               <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-full w-full">
               <ProgressKhatamDashboard />
@@ -44,9 +43,7 @@ const Dashboard = () => {
           <div className="flex flex-row w-full h-full justify-between px-4 gap-4">
             <div className="bg-neutral-100 flex flex-col rounded-3xl w-11/12 h-full justify-center items-center p-4 gap-4">
               <DashboardHeader />
-              <div className="bg-white flex justify-center items-center h-28 w-full rounded-3xl box-shadow">
-                Kalender
-              </div>
+              <DashboardKalender />
               <div className="flex w-full gap-4 justify-between items-stretch">
                 <div className="bg-white flex justify-center items-center rounded-3xl box-shadow h-64 w-1/3">
                   Regional

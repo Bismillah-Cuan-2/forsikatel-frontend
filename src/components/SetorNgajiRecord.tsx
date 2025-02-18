@@ -2,7 +2,7 @@ import RecordComponentMobile from "./SetorNgajiRecordMobileComponent"
 import totalJuzIcon from "../assets/svg/repository-icon.svg"
 import lastJuzIcon from "../assets/svg/triangle-flag-circle-icon.svg"
 import khatamIcon from "../assets/svg/verified-badge-icon.svg"
-import { MOBILE } from "../constant/DEVICES_SIZE"
+import { MOBILE } from "../constants/DEVICES_SIZE"
 import { useMediaQuery } from "@react-hook/media-query"
 import RecordComponentDesktop from "./SetorNgajiRecordDesktopComponent"
 

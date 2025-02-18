@@ -2,7 +2,7 @@ import Header1 from "./Header1"
 import Button from "./Button"
 import mushafLogo from "../assets/images/mushaf_1.png"
 import arrowIcon from "../assets/svg/arrow-icon.svg"
-import { MOBILE  } from "../constant/DEVICES_SIZE"
+import { MOBILE  } from "../constants/DEVICES_SIZE"
 import { useMediaQuery } from "@react-hook/media-query"
 
 const DashboardHeader = () => {
