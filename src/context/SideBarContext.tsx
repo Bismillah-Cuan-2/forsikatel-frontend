@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import moreIcon from "../assets/svg/more-icon.svg"
 import HeaderLogo from "../components/HeaderLogo";
 import { useMediaQuery } from "@react-hook/media-query";
-import { MOBILE } from "../constant/DEVICES_SIZE";
+import { MOBILE } from "../constants/DEVICES_SIZE";
 
 interface SideBarContextProps {
     isOpen: boolean;

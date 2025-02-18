@@ -5,7 +5,7 @@ import SetorMengajiChart from "../components/SetorMengajiChart"
 import SetorNgajiTable from "../components/SetorNgajiTable"
 import useFetch from "../hooks/useFetch"
 import { useEffect } from "react"
-import { API_SETOR_NGAJI } from "../constant/URL_API"
+import { API_SETOR_NGAJI } from "../constants/URL_API"
 
 const SetorNgaji = () => {
     const { data, fetchData } = useFetch<any>(API_SETOR_NGAJI, "GET", {Authorization: `Bearer ${localStorage.getItem("access_token")}`});

@@ -4,9 +4,9 @@ import Sajaddah from "../assets/images/sajaddah.png"
 import { useEffect, useState } from "react"
 import useFetch from "../hooks/useFetch"
 import EmbedVideo from "./EmbedVideo"
-import { API_HADIST_KULTUM } from "../constant/URL_API"
+import { API_HADIST_KULTUM } from "../constants/URL_API"
 import { useMediaQuery } from "@react-hook/media-query"
-import { MOBILE } from "../constant/DEVICES_SIZE";
+import { MOBILE } from "../constants/DEVICES_SIZE";
 
 type hadistKultumProps = {
     hadist_kultum: {

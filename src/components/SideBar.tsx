@@ -1,7 +1,7 @@
 import SideBarContent from "./SideBarContent"
 import { useSideBarContext } from "../context/SideBarContext";
 import { useMediaQuery } from "@react-hook/media-query";
-import { MOBILE } from "../constant/DEVICES_SIZE";
+import { MOBILE } from "../constants/DEVICES_SIZE";
 
 
 const SideBar = () => {
