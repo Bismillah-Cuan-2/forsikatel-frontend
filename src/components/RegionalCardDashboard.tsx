@@ -1,0 +1,24 @@
+import orangeMedal from "../assets/images/medal_orange.png"
+import redMedal from "../assets/images/medal_red.png"
+
+interface RegionalCardDashboardProps {
+    medal: string
+    children: React.ReactNode
+}
+
+const RegionalCardDashboard: React.FC<RegionalCardDashboardProps> = ({children, medal}) => {
+  return (
+    <div className="flex gap-3 items-center bg-neutral-50 py-[0.5rem] px-[0.5rem] box-shadow rounded-2xl">
+        <div className="px-1 py-1 bg-secondary-100 rounded-md">
+            {medal === "orange" ? (
+                <img src={orangeMedal} alt="orange_medal" className="object-contain w-[1rem] h-full"/>
+            ) : (
+            <img src={redMedal} alt="red_medal" className="object-contain"/>)}
+        </div>
+            {children}
+        
+    </div>
+  )
+}
+
+export default RegionalCardDashboard

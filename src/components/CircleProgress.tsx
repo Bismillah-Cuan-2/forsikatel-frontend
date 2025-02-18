@@ -8,7 +8,7 @@ interface SegmentedProgressProps {
 
 const CircleProgress: React.FC<SegmentedProgressProps> = ({
     total = 30,
-  progress = 25,
+    progress = 15,
 }) => {
     const [animatedProgress, setAnimatedProgress] = useState(0);
     const radius = 60;
@@ -25,7 +25,8 @@ const CircleProgress: React.FC<SegmentedProgressProps> = ({
 
   
     return (
-        <svg width="200" height="200" viewBox="0 0 120 120">
+      <>
+        <svg width="12.5rem" height="12.5rem" viewBox="0 0 120 120">
         <g transform="translate(60,60)">
           {[...Array(total)].map((_, index) => {
             const angle = (index * 360) / total;
@@ -69,6 +70,12 @@ const CircleProgress: React.FC<SegmentedProgressProps> = ({
             </g>
         </g>
       </svg>
+
+      <div className="flex flex-col items-center">
+        <span className="text-primary-300 text-xl font-semibold font-source">{Math.floor((animatedProgress/30)*100)}% Selesai</span>
+        <span className="px-2 text-center text-sm text-neutral-700 font-source">Tetap semangat! Hanya {30-progress} juz lagi menuju khatam</span>
+      </div>
+      </>
     );
 };
   
