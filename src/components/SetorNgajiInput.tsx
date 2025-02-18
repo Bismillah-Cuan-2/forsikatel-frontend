@@ -1,7 +1,7 @@
 import Button from "./Button"
 import uploadIcon from "../assets/svg/upload-icon.svg"
 import useFetch from "../hooks/useFetch"
-import { API_SETOR_NGAJI } from "../constant/URL_API"
+import { API_SETOR_NGAJI } from "../constants/URL_API"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import validationSchema from "../schemas/SetorNgajiValidationSchema"
 

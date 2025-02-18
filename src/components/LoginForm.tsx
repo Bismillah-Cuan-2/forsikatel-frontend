@@ -4,7 +4,7 @@ import { Formik, Form } from "formik";
 import validationSchema from "../schemas/LoginValidationSchema";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import { API_LOGIN  } from "../constant/URL_API";
+import { API_LOGIN  } from "../constants/URL_API";
 
 interface LoginValues {
   fullName: string;

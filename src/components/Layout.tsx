@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"
 import SideBar from "./SideBar";
 import { SideBarContextProvider } from "../context/SideBarContext";
 import HeaderContent from "./HeaderContent";
-import { DESKTOP, MOBILE } from "../constant/DEVICES_SIZE";
+import { DESKTOP, MOBILE } from "../constants/DEVICES_SIZE";
 import Footer from "./Footer";
 import { useMediaQuery } from "@react-hook/media-query";
 

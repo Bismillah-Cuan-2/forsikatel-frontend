@@ -9,7 +9,7 @@ import Button from './Button'
 import { useState } from "react"
 import RegionalPopOut from './RegionalPopOut'
 import useFetch from '../hooks/useFetch'
-import { API_REGISTER } from '../constant/URL_API'
+import { API_REGISTER } from '../constants/URL_API'
 import validationSchema from '../schemas/RegisterValidationSchema'
 
 interface RegisterValues {
