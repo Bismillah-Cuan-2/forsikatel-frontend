@@ -2,7 +2,7 @@ export interface LatestActivity {
     region: string;
     name: string;
     juz_read: number;
-    entry_time: Date;
+    entry_time: string | Date;
 }
 
 export interface Calendar {

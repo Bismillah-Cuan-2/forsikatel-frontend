@@ -20,7 +20,7 @@ const columns: ColumnDef<LatestActivity>[] = [
         header: "Waktu Laporan", 
         cell: (info) => new Intl
             .DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric" })
-            .format(info.getValue<Date>()) 
+            .format(new Date(info.getValue<Date>())) 
     },
 ];
 
