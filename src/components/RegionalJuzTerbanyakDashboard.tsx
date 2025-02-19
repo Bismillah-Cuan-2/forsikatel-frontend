@@ -1,28 +1,17 @@
 import RegionalCardDashboard from "./RegionalCardDashboard"
-import useFetch from "../hooks/useFetch"
-import {  useEffect } from "react"
-import { DashboardResponse } from "../constants/DASHBORAD_RESPONSES"
-import { API_DASHBOARD } from "../constants/URL_API"
-const RegionalJuzTerbanyakDashboard = () => {
-  const {error, loading, data, fetchData} = useFetch<DashboardResponse>(
-    API_DASHBOARD, 
-    "GET", 
-    {Authorization: `Bearer ${localStorage.getItem("access_token")}`}
-  );
+import { TopRegion } from "../constants/interfaces/DASHBORAD_RESPONSES"
 
-  useEffect(() => {
-    fetchData()
-            if (error) {
-                alert(error);
-            }
-  }, [])
-
+interface RegionalJuzTerbanyakDashboardProps {
+  data: TopRegion[];
+  loading: boolean
+}
+const RegionalJuzTerbanyakDashboard: React.FC<RegionalJuzTerbanyakDashboardProps> = ({ data, loading }) => {
 
   return (
-    <div className="flex flex-col gap-2 py-[1rem] px-[1.5rem]">
-       <h3 className="text-base font-semibold font-source">Regional dengan Jumlah Juz Terbanyak</h3>
+    <div className="flex flex-col gap-3 xl:w-2/6">
+       <h3 className="font-semibold font-source text-xs">Regional dengan Jumlah Juz Terbanyak</h3>
        {loading ? (<p>Loading...</p>) :(<>
-         {!data?.top_region.error  && data?.top_region.map((region, ) => {
+         {data && data.map((region, ) => {
           const displayRegion = region.region.split("_").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
           return (
             <RegionalCardDashboard medal="orange">

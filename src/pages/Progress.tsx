@@ -1,10 +1,8 @@
-// progress
+import ComingSoon from "../components/ComingSoon"
 
 const Progress = () => {
     return (
-      <div>
-          <h1>Coming Soon Progress Pages👷</h1>
-      </div>
+      <ComingSoon />
     )
   }
   

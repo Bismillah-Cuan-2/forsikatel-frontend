@@ -9,9 +9,9 @@ const DashboardHeader = () => {
     const isMobile = useMediaQuery(MOBILE);
 
   return (
-    <div className="lg:bg-white lg:box-shadow flex lg:flex-row-reverse justify-center lg:justify-around items-center p-2 lg:p-6 gap-2 w-full rounded-3xl">
+    <div className="lg:bg-neutral-50 flex lg:flex-row-reverse justify-center lg:justify-around items-center p-2 lg:p-6 gap-2 w-full rounded-3xl">
         <div className="flex w-5/6 h-11/12 justify-center items-center xl:w-5/12 lg:w-11/12 md:w-1/3 lg:h-8 lg:z-10">
-            <img src={mushafLogo} className="object-cover h-52 lg:h-56 sticky" />
+            <img src={mushafLogo} className="object-cover h-50 lg:h-56 sticky" />
         </div>
         <div className="flex flex-col gap-2 justify-center">
             <Header1 

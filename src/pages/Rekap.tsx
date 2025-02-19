@@ -1,10 +1,8 @@
-// progress
+import ComingSoon from "../components/ComingSoon"
 
 const Rekap = () => {
     return (
-      <div>
-          <h1>Coming Soon Rekap Pages👷</h1>
-      </div>
+      <ComingSoon />
     )
   }
   
