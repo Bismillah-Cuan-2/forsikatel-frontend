@@ -11,7 +11,7 @@ const RegionalCardDashboard: React.FC<RegionalCardDashboardProps> = ({children, 
     <div className="flex gap-3 items-center bg-neutral-50 box-shadow lg:shadow-none rounded-2xl py-1 px-2">
         <div className="px-1 py-1 bg-secondary-100 rounded-md">
             {medal === "orange" ? (
-                <img src={orangeMedal} alt="orange_medal" className="object-contain w-[1rem] h-full"/>
+                <img src={orangeMedal} alt="orange_medal" className="object-contain"/>
             ) : (
             <img src={redMedal} alt="red_medal" className="object-contain"/>)}
         </div>
