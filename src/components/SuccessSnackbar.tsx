@@ -1,14 +1,16 @@
 import { Snackbar, Alert, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import successIcon from "../assets/svg/success-icon.svg"
+import { ReactNode } from "react";
 
 interface SuccessSnackbarProps {
     isOpen: boolean;
     handleClose: (event?: React.SyntheticEvent | Event, reason?: string) => void;
+    children: ReactNode
   }
   
 
-const SuccessSnackbar: React.FC<SuccessSnackbarProps> = ({ isOpen, handleClose }) => {    
+const SuccessSnackbar: React.FC<SuccessSnackbarProps> = ({ isOpen, handleClose, children }) => {    
 
   return (
     <>
@@ -33,14 +35,7 @@ const SuccessSnackbar: React.FC<SuccessSnackbarProps> = ({ isOpen, handleClose }
             width: "full"
           }}
         >
-            <div className="flex flex-col font-source">
-                <p className="text-lg font-semibold">
-                    Setoran Berhasil!
-                </p>
-                <p className="text-xs font-medium">
-                    Alhamdulillah, setoran mengaji Anda hari ini telah berhasil tercatat.
-                </p>
-            </div>
+            { children }
         </Alert>
       </Snackbar>
     </>

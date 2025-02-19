@@ -1,13 +1,14 @@
 import { Snackbar, Alert, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import errorIcon from "../assets/svg/error-icon.svg"
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 interface ErrorInputSnackbarProps {
     error: boolean;
+    children: ReactNode;
   }
   
-const ErrorInputSnackbar: React.FC<ErrorInputSnackbarProps> = ({ error }) => { 
+const ErrorInputSnackbar: React.FC<ErrorInputSnackbarProps> = ({ error, children }) => { 
     console.log(error)
     const [ isError, setIsError ] = useState(error)   
 
@@ -39,14 +40,8 @@ const ErrorInputSnackbar: React.FC<ErrorInputSnackbarProps> = ({ error }) => {
             width: "full"
           }}
         >
-            <div className="flex flex-col font-source">
-                <p className="text-lg font-semibold">
-                    Setoran Gagal Tercatat
-                </p>
-                <p className="text-xs font-medium">
-                    Maaf, setoran mengaji Anda hari ini belum berhasil. 
-                </p>
-            </div>
+            { children }
+      
         </Alert>
       </Snackbar>
     </>

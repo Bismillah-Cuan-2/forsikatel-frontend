@@ -6,7 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik"
 import validationSchema from "../schemas/SetorNgajiValidationSchema"
 import { useState } from "react"
 import SuccessSnackbar from "./SuccessSnackBar"
-import ErrorInputSnackbar from "./ErrroInputSnackbar"
+import ErrorInputSnackbar from "./ErrorSnackbar"
 
 interface SetorNgajiInputValue {
   juz: number | string
@@ -29,6 +29,7 @@ const SetorNgajiInput: React.FC<SetorNgajiProps> = ({ onSubmitSuccess }) => {
   const [ showSnackbar, setShowSnackbar ] = useState(false)
 
   const handleSubmit = async (values: SetorNgajiInputValue) => {
+    setShowSnackbar(error===null ? true : false);
     try {
       await fetchData({ juz_read: Number(values.juz) });
 
@@ -37,7 +38,6 @@ const SetorNgajiInput: React.FC<SetorNgajiProps> = ({ onSubmitSuccess }) => {
       }
 
       if (!error) {
-        setShowSnackbar(true);
         onSubmitSuccess(); // Refresh main data after successful submission
       }
     } catch (err) {
@@ -75,9 +75,27 @@ const SetorNgajiInput: React.FC<SetorNgajiProps> = ({ onSubmitSuccess }) => {
             </Button>
             <ErrorMessage name="juz" component="div" className="text-sm text-primary-300 px-3 pt-1" />
             { error ? (
-              <ErrorInputSnackbar error={true}/>
+              <ErrorInputSnackbar error={true}>
+                <div className="flex flex-col font-source">
+                    <p className="text-lg font-semibold">
+                        Setoran Gagal Tercatat
+                    </p>
+                    <p className="text-xs font-medium">
+                        Maaf, setoran mengaji Anda hari ini belum berhasil. 
+                    </p>
+                </div>
+              </ErrorInputSnackbar>
             ) : (
-              <SuccessSnackbar isOpen={showSnackbar} handleClose={handleClose}/>
+              <SuccessSnackbar isOpen={showSnackbar} handleClose={handleClose}>
+                <div className="flex flex-col font-source">
+                  <p className="text-lg font-semibold">
+                      Setoran Berhasil!
+                  </p>
+                  <p className="text-xs font-medium">
+                      Alhamdulillah, setoran mengaji Anda hari ini telah berhasil tercatat.
+                  </p>
+                </div>
+              </SuccessSnackbar>
             )}
           </Form> 
         )}
