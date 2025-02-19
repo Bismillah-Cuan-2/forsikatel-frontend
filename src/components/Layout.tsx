@@ -9,7 +9,7 @@ import { useMediaQuery } from "@react-hook/media-query";
 
 const Layout = ({ children }: { children: React.ReactNode}) => {
     const location = useLocation();
-    const noSideBarRoutes = ["/login", "/register"];
+    const noSideBarRoutes = ["/login", "/register", "/Login", "/Register"];
     const showSideBar = !noSideBarRoutes.includes(location.pathname);
     const isDesktop = useMediaQuery(DESKTOP);
     const isMobile =  useMediaQuery(MOBILE);

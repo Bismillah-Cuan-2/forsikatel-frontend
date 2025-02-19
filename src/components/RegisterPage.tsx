@@ -1,12 +1,11 @@
 import register_img from '../assets/images/register_desktop.png'
-import noisyGradient from '../assets/images/noisyGradient.png'
 import { Formik, Form,  ErrorMessage, Field} from "formik"
 import HeaderLogo from './HeaderLogo'
 import { Link, useNavigate } from "react-router-dom"
 import RegisterInput from './AuthInput'
 import searchSVG from '../assets/svg/search.svg'
 import Button from './Button'
-import { useState } from "react"
+import { useState, useRef } from "react"
 import RegionalPopOut from './RegionalPopOut'
 import useFetch from '../hooks/useFetch'
 import { API_REGISTER } from '../constants/URL_API'
@@ -34,6 +33,7 @@ export const RegisterPage = () => {
     const initialValues = { fullName: "", phoneNumber: "",  regional: "", regionalValue: "" };
     const Navigate = useNavigate()
 
+    const inputRef = useRef<HTMLInputElement>(null);
     async function handleSubmit(e: RegisterValues) {
         await fetchData({ name_husband: e.fullName, phone_number: e.phoneNumber, regional: e.regionalValue });
         if (data) {
@@ -48,24 +48,21 @@ export const RegisterPage = () => {
         console.log(e)
     }
 
+    
+
   return (
     <>
-         {/* Background gradient mobile */} 
-        <div className={`md:hidden fixed z-[-10] top-0 left-0`}>
-            <img className='object-cover w-full h-full' draggable={false} src={noisyGradient} alt="noisyGradient" />
-        </div>
-
         {/* Background white for mobile */}
-        <div className='mt-[4.5rem] rounded-tl-[6rem] md:hidden fixed left-0 top-0 w-full h-screen bg-white'> </div>
-        <div className='mt-[7rem] md:mt-0 relative px-3 py-1 md:py-8 md:px-[2.4rem] flex lg:flex-row flex-col overflow-y-hidden md:overflow-hidden items-center w-full h-screen'>
+        <div className='noisy-gradient-background flex items-center overflow-y-auto pt-[5rem] lg:pt-0'>
+            <div className='bg-white sm:bg-transparent flex justify-center lg:items-center rounded-tl-[5rem] px-[1rem] pt-[3rem] md:pt-0  w-full'>
             {/* RegisterImage */}
-            <div className='hidden lg:block relative z-10 w-full'>
-                <img draggable={false} className='hidden  lg:block object-contain md:w-full 2xl:w-[35rem] h-full' src={register_img} alt="register_desktop" />
+            <div className='hidden lg:block ml-8 relative z-10'>
+                <img draggable={false} className='hidden lg:block object-contain' src={register_img} alt="register_desktop" />
             </div>
             {/* Form Section */}
-            <section className='relative flex flex-col px-2 2xl:w-full lg:py-[6rem] 2xl:pt-[10rem] lg:pr-[5rem] 2xl:px-[6rem] lg:left-[-2rem] gap-5'>
-                <div className='flex flex-col  gap-3'>
-                    <div className='flex justify-center'>
+            <section className='relative flex flex-col px-2 2xl:w-full lg:py-[1rem] 2xl:pt-[3rem] lg:pr-[1rem] 2xl:px-[6rem] lg:left-[-2rem] gap-5'>
+                <div className='flex flex-col items-center justify-center gap-3'>
+                    <div className='flex justify-center items-center'>
                     <HeaderLogo imgSize="w-12 h-8"/>
                     </div>          
                     <div className='mt-[1rem]'>
@@ -87,9 +84,9 @@ export const RegisterPage = () => {
                                 <div className="flex flex-col gap-5 mb-4">
                                     <RegisterInput 
                                         id="fullName" 
-                                        label="Nama Lengkap" 
+                                        label="Nama - Nama Suami" 
                                         type="text" 
-                                        placeholder='Masukkan nama sesuai identitas (Nama Istri - Nama Suami)'
+                                        placeholder='Masukkan Nama - Nama Suami'
                                         value={values.fullName}   
                                     />
                                     <RegisterInput 
@@ -106,17 +103,20 @@ export const RegisterPage = () => {
                                             <Field 
                                                 className="text-sm pr-2 pl-10 h-10 bg-neutral-100 font-source border-b-neutral-900 border-b-2" 
                                                 id="regional" 
-                                                type="text" 
+                                                type="text"
+                                                ref={inputRef} 
                                                 placeholder='Pilih kantor regionalmu'
                                                 // onChange={(e: ChangeEvent<HTMLInputElement>) => {setShowSearch(true), setFieldValue("regional", e.target.value)}}
-                                                onClick={() => setShowSearch(true)}    
+                                                onClick={() => setShowSearch(true)}
+                                                autocomplete="off"    
                                                 value={values.regional}
                                             />
                                             <ErrorMessage name="regional" component="div" className="text-sm text-primary-300" />
                                         </div>
                                         {showSearch && 
                                             <RegionalPopOut 
-                                                searchRegional={values.regional} 
+                                                searchRegional={values.regional}
+                                                inputRef={inputRef} 
                                                 OnBlur={() => setShowSearch(false)} 
                                                 OnSelected={(e) => {setFieldValue("regional", e.regional), setFieldValue("regionalValue", e.values)}} 
                                             /> 
@@ -143,8 +143,10 @@ export const RegisterPage = () => {
                             )}
                         </Formik>
                     </div>
+                    
                 </div>
             </section>
+            </div>
         </div>
         
     </>
