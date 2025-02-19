@@ -3,13 +3,14 @@ import RightArrow from "../assets/svg/right-arrow.svg"
 interface HadistHariIniDashBoardProps {
     isMobile?: boolean
     isDesktop?: boolean
+    data?: string
 }
 
-const HadistHariIniDashBoard: React.FC<HadistHariIniDashBoardProps> = ({isMobile, isDesktop}) => {
+const HadistHariIniDashBoard: React.FC<HadistHariIniDashBoardProps> = ({isMobile, isDesktop, data=""}) => {
   return (
     <>
         {isDesktop && (
-            <div className="flex flex-col gap-5 py-[3.5rem] px-[1.8rem] w-full">
+            <div className="flex flex-col gap-5 py-[3.5rem] px-[1.2rem] w-full">
                 <div className="flex justify-between items-center">
                     <div>
                         <h3 className="text-2xl font-bold">Hadits</h3>
@@ -19,12 +20,12 @@ const HadistHariIniDashBoard: React.FC<HadistHariIniDashBoardProps> = ({isMobile
                         <img src={RightArrow} alt="right_arrow_icon" className="object-cover"/>
                     </Link>
                 </div>
-                <p className="text-sm font-source text-justify">Hadist Desktop</p>
+                <p className="text-sm font-source text-justify">{ data }</p>
             </div>
         )}
 
         {isMobile && (
-            <div className="flex flex-col gap-5 py-[1rem] px-[1rem] w-full">
+            <div className="flex flex-col gap-5 p-[1rem] w-full bg-neutral-50 rounded-xl box-shadow">
                 <div className="flex justify-between items-center">
                     <div>
                         <h3 className="text-2xl font-bold">Hadits</h3>

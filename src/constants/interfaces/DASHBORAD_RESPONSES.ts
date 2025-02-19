@@ -2,7 +2,7 @@ export interface LatestActivity {
     region: string;
     name: string;
     juz_read: number;
-    entry_time: Date;
+    entry_time: string | Date;
 }
 
 export interface Calendar {
@@ -21,7 +21,7 @@ export interface TopRegion {
 }
 
 export interface DashboardResponse {
-    hadists: string
+    hadits: string
     kalender: Calendar
     last_juz: number
     latest_activity: LatestActivity[]

@@ -1,7 +1,7 @@
 import Header2 from "./Header2"
 import Table from "./Table"
 import { ColumnDef } from "@tanstack/react-table";
-import { LatestActivity } from "../constants/DASHBORAD_RESPONSES";
+import { LatestActivity } from "../constants/interfaces/DASHBORAD_RESPONSES";
   
 // const dummyUsers: LatestActivity[] = [
 // { region: "Jakarta", name: "Ahmad", juz_read: 5, entry_time: new Date("2025-02-18") },
@@ -20,7 +20,7 @@ const columns: ColumnDef<LatestActivity>[] = [
         header: "Waktu Laporan", 
         cell: (info) => new Intl
             .DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric" })
-            .format(info.getValue<Date>()) 
+            .format(new Date(info.getValue<Date>())) 
     },
 ];
 
@@ -34,7 +34,7 @@ interface DashboardAktivitasMengajiProps {
 const DashboarAktivitasMengaji: React.FC<DashboardAktivitasMengajiProps> = ({ data, loading }) => {
     
   return (
-    <div className="bg-neutral-50 flex flex-col justify-center w-full rounded-3xl box-shadow px-6 py-3 gap-2">
+    <div className="bg-neutral-50 flex flex-col justify-center w-full rounded-3xl px-6 py-3 gap-2">
         <Header2 title="Aktivitas Mengaji Terbaru" className="px-2"/>
         {
             loading ? (

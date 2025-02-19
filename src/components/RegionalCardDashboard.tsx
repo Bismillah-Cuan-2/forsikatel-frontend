@@ -8,7 +8,7 @@ interface RegionalCardDashboardProps {
 
 const RegionalCardDashboard: React.FC<RegionalCardDashboardProps> = ({children, medal}) => {
   return (
-    <div className="flex gap-3 items-center bg-neutral-50 py-[0.5rem] px-[0.5rem] box-shadow rounded-2xl">
+    <div className="flex gap-3 items-center bg-neutral-50 box-shadow lg:shadow-none rounded-2xl py-1 px-2">
         <div className="px-1 py-1 bg-secondary-100 rounded-md">
             {medal === "orange" ? (
                 <img src={orangeMedal} alt="orange_medal" className="object-contain w-[1rem] h-full"/>
