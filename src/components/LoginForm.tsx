@@ -50,7 +50,7 @@ const LoginForm = () => {
         {({ isSubmitting }) => (
           <Form className="flex flex-col gap-8">
             <div className="flex flex-col w-full gap-8">
-              <LoginInput label="Nama Lengkap" id="fullName" name="fullName" placeholder="Masukkan Nama Lengkap Anda"/>
+              <LoginInput label="Nama - Nama Suami" id="fullName" name="fullName" placeholder="Masukkan Nama - Nama Suami"/>
               <LoginInput label="Nomor Handphone" id="phoneNumber" name="phoneNumber" placeholder="Masukkan Nomor Handphone Anda"/>
             </div>
             <Button type="submit" className="justify-center px-3 py-2 rounded-none font-bold text-base font-source" color="bg-primary-300  text-white w-full hover:bg-primary-200" disabled={isSubmitting}>

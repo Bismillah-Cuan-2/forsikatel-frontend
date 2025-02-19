@@ -45,7 +45,7 @@ const HadistKultumBg = ({children}: {children: React.ReactNode}) => {
         {loading ? <LoadingCircular /> : ( <>
             <section className="flex lg:flex-row flex-col px-[1rem] md:pr-[2.1rem] md:gap-0 gap-10 items-center lg:items-start w-full lg:mt-5 mt-5">
             {/* Hadits dan kultum headline */}
-            <div className="flex flex-col md:gap-2 2xl:w-[40%] lg:w-[30%] w-full md:px-4 px-[4rem]">
+            <div className="flex flex-col md:gap-2 2xl:w-[40%] pt-[2rem] md:pt-0 lg:w-[30%] w-full md:px-4 px-[5rem]">
                 <h2 className="lg:text-4xl text-[28px] font-bold text-primary-300 text-center lg:text-start">
                     Hadist dan Kultum Hari Ini
                 </h2>
