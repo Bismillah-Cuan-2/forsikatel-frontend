@@ -4,7 +4,6 @@ import Header2 from "./Header2";
 import { API_PROGRESS_CHART } from "../constants/URL_API";
 import useFetch from "../hooks/useFetch";
 import { useEffect } from "react";
-import { sortDays } from "../utils/functions/sortDay";
 
 interface ProgressChart {
     day: string;
@@ -45,8 +44,8 @@ const SetorMengajiChart = () => {
                         padding={{ left: 20, right: 20 }}
                     />
                     <YAxis hide />
-                    <Tooltip />
-                    <Legend />
+                    <Tooltip/>
+                    <Legend/>
                     <Line
                         type="linear"
                         dataKey="today"

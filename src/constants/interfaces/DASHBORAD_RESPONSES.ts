@@ -26,6 +26,7 @@ export interface DashboardResponse {
     last_juz: number
     latest_activity: LatestActivity[]
     message: string
+    time_in_day: string
     today_report_region: []
     top_region: TopRegion[]
 }

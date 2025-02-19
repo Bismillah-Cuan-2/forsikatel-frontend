@@ -27,13 +27,13 @@ const SetorNgaji = () => {
                   title="Setoran Ngaji Hari Ini"
                   text="Yuk catat bacaanmu dan lihat progresnya! Berapa Juz yang Kamu Baca Hari Ini?"
                 />
-                <SetorNgajiInput />
+                <SetorNgajiInput onSubmitSuccess={fetchData}/>
               </div>
-              {data && <SetorNgajiRecord last_juz={data?.total_progress.last_juz} total_juz={data?.total_progress.total_juz} total_khatam={data?.total_progress.total_khatam}/>}
+              <SetorNgajiRecord last_juz={data.total_progress.last_juz} total_juz={data.total_progress.total_juz} total_khatam={data.total_progress.total_khatam}/>
             </div>
             <div className="flex flex-col md:flex-row-reverse gap-8 justify-between items-stretch">
               <SetorMengajiChart />
-              {data && <SetorNgajiTable data={data.history}/>}
+              <SetorNgajiTable data={data.history}/>
             </div>
           </div>
         ) : (
