@@ -31,7 +31,7 @@ const Dashboard = () => {
           <div className="flex flex-col w-full h-full items-center px-4 gap-4">
             { !loading && data ? (
               <>
-                <DashboardHeader time={data.time_in_day} name={"Afif"}/>
+                <DashboardHeader time={data.time_in_day} name={data.name}/>
                 <DashboardKalender data={data.kalender}/>
                 <div className="flex gap-3 items-start justify-between w-full">
                   <ProgressKhatamDashboard progress={data?.last_juz}/>

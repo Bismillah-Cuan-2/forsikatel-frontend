@@ -1,7 +1,7 @@
 import register_img from '../assets/images/register_desktop.png'
 import { Formik, Form,  ErrorMessage, Field} from "formik"
 import HeaderLogo from './HeaderLogo'
-import { Link, useNavigate } from "react-router-dom"
+import { Link,  } from "react-router-dom"
 import RegisterInput from './AuthInput'
 import searchSVG from '../assets/svg/search.svg'
 import Button from './Button'
@@ -10,6 +10,8 @@ import RegionalPopOut from './RegionalPopOut'
 import useFetch from '../hooks/useFetch'
 import { API_REGISTER } from '../constants/URL_API'
 import validationSchema from '../schemas/RegisterValidationSchema'
+import ErrorInputSnackbar from './ErrorSnackbar'
+import SuccessSnackbar from './SuccessSnackbar'
 
 interface RegisterValues {
     fullName: string,
@@ -29,23 +31,26 @@ interface LoginResponse {
 
 export const RegisterPage = () => {
     const [showSearch, setShowSearch] = useState(false);
+    const [showSnackbar, setShowSnackbar] = useState(false);
     const { data, error, loading, fetchData } = useFetch<LoginResponse>(API_REGISTER, "POST");
     const initialValues = { fullName: "", phoneNumber: "",  regional: "", regionalValue: "" };
-    const Navigate = useNavigate()
+    // const Navigate = useNavigate()
 
     const inputRef = useRef<HTMLInputElement>(null);
     async function handleSubmit(e: RegisterValues) {
-        await fetchData({ name_husband: e.fullName, phone_number: e.phoneNumber, regional: e.regionalValue });
-        if (data) {
-            localStorage.setItem("access_token", data.access_token);
-            localStorage.setItem("refresh_token", data.refresh_token);
-            Navigate("/login");
+        try {
+            await fetchData({ name_husband: e.fullName, phone_number: e.phoneNumber, regional: e.regionalValue });
+            if (data) {
+                localStorage.setItem("access_token", data.access_token);
+                localStorage.setItem("refresh_token", data.refresh_token); 
+            }
+           
+            setShowSnackbar(error=== null ? true : false);
+            // Navigate("/login");
+        } catch (error) {
+          
         }
-
-        if (error) {
-            alert(error);
-          }
-        console.log(e)
+        console.log("Error submitting:", error);
     }
 
     
@@ -54,7 +59,7 @@ export const RegisterPage = () => {
     <>
         {/* Background white for mobile */}
         <div className='noisy-gradient-background flex items-center overflow-y-auto pt-[5rem] lg:pt-0'>
-            <div className='bg-white sm:bg-transparent flex justify-center lg:items-center rounded-tl-[5rem] px-[1rem] pt-[3rem] md:pt-0  w-full'>
+            <div className='bg-white sm:bg-transparent flex justify-center lg:items-center rounded-tl-[5rem] px-[1rem] pt-[3rem] md:pt-0 h-full w-full'>
             {/* RegisterImage */}
             <div className='hidden lg:block ml-8 relative z-10'>
                 <img draggable={false} className='hidden lg:block object-contain' src={register_img} alt="register_desktop" />
@@ -81,7 +86,7 @@ export const RegisterPage = () => {
                             >
                         {({ isSubmitting, values, setFieldValue }) => (
                             <Form className="w-full">
-                                <div className="flex flex-col gap-5 mb-4">
+                                <div className="flex flex-col gap-5 pb-[3rem]">
                                     <RegisterInput 
                                         id="fullName" 
                                         label="Nama - Nama Suami" 
@@ -108,7 +113,7 @@ export const RegisterPage = () => {
                                                 placeholder='Pilih kantor regionalmu'
                                                 // onChange={(e: ChangeEvent<HTMLInputElement>) => {setShowSearch(true), setFieldValue("regional", e.target.value)}}
                                                 onClick={() => setShowSearch(true)}
-                                                autocomplete="off"    
+                                                autoComplete="off"    
                                                 value={values.regional}
                                             />
                                             <ErrorMessage name="regional" component="div" className="text-sm text-primary-300" />
@@ -117,7 +122,8 @@ export const RegisterPage = () => {
                                             <RegionalPopOut 
                                                 searchRegional={values.regional}
                                                 inputRef={inputRef} 
-                                                OnBlur={() => setShowSearch(false)} 
+                                                OnBlur={() => setShowSearch(false)}
+                                                OnChange={() => setShowSearch(true)} 
                                                 OnSelected={(e) => {setFieldValue("regional", e.regional), setFieldValue("regionalValue", e.values)}} 
                                             /> 
                                         }
@@ -127,14 +133,14 @@ export const RegisterPage = () => {
                                                 className="justify-center px-3 py-2 rounded-none font-bold text-base font-source"
                                                 color='bg-primary-300  text-white w-full hover:bg-primary-200 '
                                                 type="submit"
-                                                disabled={isSubmitting}
+                                                // disabled={isSubmitting}
                                             >
                                                 {loading ? "Loading..." : "Daftar Sekarang"}
                                             </Button>
                                     </div>
 
                                     <hr className="h-px my-8 border-0 bg-[#DDE1E6] " />
-                                    <p className="text-neutal-900 text-sm font-normal font-source mb-[5rem]">Sudah punya akun?  
+                                    <p className="text-neutal-900 text-sm font-normal font-source">Sudah punya akun?  
                                         <Link to="/login" className="text-primary-300 hover:text-primary-100 font-normal underline"> Masuk di sini</Link>
                                     </p>
                                 </div>
@@ -148,6 +154,32 @@ export const RegisterPage = () => {
             </section>
             </div>
         </div>
+        {error !== null  ? (<ErrorInputSnackbar error={true}>
+            
+        <div className="flex flex-col font-source">
+                    <p className="text-lg font-semibold">
+                        Registrasi Gagal!
+                    </p>
+                    <p className="text-xs font-medium">
+                        Oops, ada yang tidak beres!
+                    </p>
+                    <ul className='text-xs font-medium'>
+                            <li>Coba periksa kembali data yang kamu masukkan.</li>
+                            <li>Pastikan koneksi internetmu stabil.</li>
+                            <li>Jika masalah berlanjut, hubungi tim dukungan kami.</li>
+                        </ul> 
+                </div>
+        </ErrorInputSnackbar>) : (
+        <SuccessSnackbar isOpen={showSnackbar} handleClose={() => setShowSnackbar(false)}>
+        <div className="flex flex-col font-source">
+                  <p className="text-lg font-semibold">
+                      Registrasi Berhasil!
+                  </p>
+                  <p className="text-xs font-medium">
+                      Selamat, akunmu telah berhasil dibuat.
+                  </p>
+                </div>
+            </SuccessSnackbar>)}
         
     </>
   )

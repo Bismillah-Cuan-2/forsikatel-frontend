@@ -55,6 +55,7 @@ interface RegionalPopOutProps {
     inputRef?: React.RefObject<HTMLInputElement | null>
     OnBlur: () => void
     OnSelected: (e: regionalListProps) => void
+    OnChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 const RegionalPopOut: React.FC<RegionalPopOutProps> = ({searchRegional,  OnBlur, OnSelected, inputRef}) => {
     const [position, setPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });

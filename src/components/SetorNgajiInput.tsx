@@ -5,7 +5,7 @@ import { API_SETOR_NGAJI } from "../constants/URL_API"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import validationSchema from "../schemas/SetorNgajiValidationSchema"
 import { useState } from "react"
-import SuccessSnackbar from "./SuccessSnackBar"
+import SuccessSnackbar from "./SuccessSnackbar"
 import ErrorInputSnackbar from "./ErrorSnackbar"
 
 interface SetorNgajiInputValue {
