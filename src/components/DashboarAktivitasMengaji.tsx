@@ -2,6 +2,8 @@ import Header2 from "./Header2"
 import Table from "./Table"
 import { ColumnDef } from "@tanstack/react-table";
 import { LatestActivity } from "../constants/interfaces/DASHBORAD_RESPONSES";
+import { regionInterpreter } from "../utils/functions/regionInterpreter";
+import { toTitleCase } from "../utils/functions/toTitleCase";
   
 // const dummyUsers: LatestActivity[] = [
 // { region: "Jakarta", name: "Ahmad", juz_read: 5, entry_time: new Date("2025-02-18") },
@@ -32,7 +34,12 @@ interface DashboardAktivitasMengajiProps {
 
 
 const DashboarAktivitasMengaji: React.FC<DashboardAktivitasMengajiProps> = ({ data, loading }) => {
-    
+    const transformedData = data.map((activity) => ({
+        ...activity, 
+        region: regionInterpreter(activity.region), // Transform region
+        name: toTitleCase(activity.name)
+    }));
+
   return (
     <div className="bg-neutral-50 flex flex-col justify-center w-full rounded-3xl px-6 py-3 gap-2">
         <Header2 title="Aktivitas Mengaji Terbaru" className="px-2"/>
@@ -40,7 +47,7 @@ const DashboarAktivitasMengaji: React.FC<DashboardAktivitasMengajiProps> = ({ da
             loading ? (
                 <p>Loading...</p>
             ) : (
-                <Table data={data} columns={columns} classNameHeader="font-medium text-sm" borderBody="border-0 font-normal" firstHighlight={true}/>
+                <Table data={transformedData} columns={columns} classNameHeader="font-medium text-sm" borderBody="border-0 font-normal" firstHighlight={true}/>
             )
         }
     </div>

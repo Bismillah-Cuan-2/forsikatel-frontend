@@ -4,6 +4,9 @@ import useFetch from "../hooks/useFetch"
 import { API_SETOR_NGAJI } from "../constants/URL_API"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import validationSchema from "../schemas/SetorNgajiValidationSchema"
+import { useState } from "react"
+import SuccessSnackbar from "./SuccessSnackBar"
+import ErrorInputSnackbar from "./ErrroInputSnackbar"
 
 interface SetorNgajiInputValue {
   juz: number | string
@@ -13,23 +16,39 @@ interface SetorNgajiResponse {
   msg: string
 }
 
-const SetorNgajiInput = () => {
+interface SetorNgajiProps {
+  onSubmitSuccess: () => void
+}
+
+const SetorNgajiInput: React.FC<SetorNgajiProps> = ({ onSubmitSuccess }) => {
   const { data, error, loading, fetchData } = useFetch<SetorNgajiResponse>(
     API_SETOR_NGAJI, 
     "POST", 
     { Authorization: `Bearer ${localStorage.getItem("access_token")}`}
   );
+  const [ showSnackbar, setShowSnackbar ] = useState(false)
 
   const handleSubmit = async (values: SetorNgajiInputValue) => {
-    await fetchData({ juz_read: Number(values.juz) });
-    if (data) {
-      console.log(data.msg)
-    }
+    try {
+      await fetchData({ juz_read: Number(values.juz) });
 
-    if (error) {
-      alert(error);
+      if (data) {
+        console.log(data.msg);  // Ensure message logs only after a successful response
+      }
+
+      if (!error) {
+        setShowSnackbar(true);
+        onSubmitSuccess(); // Refresh main data after successful submission
+      }
+    } catch (err) {
+      console.error("Error submitting:", err);
     }
   }
+
+  const handleClose = (_event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === "clickaway") return;
+    setShowSnackbar(false)
+  };
 
   return (
       <Formik
@@ -55,6 +74,11 @@ const SetorNgajiInput = () => {
               { loading ? "Loading..." : "Kirim Setoran" }
             </Button>
             <ErrorMessage name="juz" component="div" className="text-sm text-primary-300 px-3 pt-1" />
+            { error ? (
+              <ErrorInputSnackbar error={true}/>
+            ) : (
+              <SuccessSnackbar isOpen={showSnackbar} handleClose={handleClose}/>
+            )}
           </Form> 
         )}
       </Formik>

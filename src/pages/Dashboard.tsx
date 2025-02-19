@@ -31,13 +31,13 @@ const Dashboard = () => {
           <div className="flex flex-col w-full h-full items-center px-4 gap-4">
             { !loading && data ? (
               <>
-                <DashboardHeader />
+                <DashboardHeader time={data.time_in_day} name={"Afif"}/>
                 <DashboardKalender data={data.kalender}/>
                 <div className="flex gap-3 items-start justify-between w-full">
                   <ProgressKhatamDashboard progress={data?.last_juz}/>
-                  <div className="flex flex-col justify-between w-full h-full">
+                  <div className="flex flex-col justify-between w-full h-full gap-1">
                     <HadistHariIniDashBoard isMobile={isMobile} />
-                    {data && <RegionalJuzTerbanyakDashboard data={data.top_region} loading={loading}/>}
+                    <RegionalJuzTerbanyakDashboard data={data.top_region} loading={loading}/>
                   </div>
                 </div>
                 <div className="bg-white flex flex-col justify-center items-center h-full w-full rounded-3xl text-center font-bold text-neutral-900 gap-2 py-4">
@@ -59,7 +59,7 @@ const Dashboard = () => {
             { !loading && data ? (
               <>
                 <div className="bg-neutral-100 flex flex-col rounded-3xl w-11/12 h-full justify-center items-center p-4 gap-4">
-                  <DashboardHeader />
+                  <DashboardHeader time={data.time_in_day} name={"Afif"}/>
                   <DashboardKalender data={data.kalender}/>
                   <div className="flex w-full gap-4 justify-between items-stretch">
                     <RegionalJuzTerbanyakDashboard data={data?.top_region} loading={loading}/>

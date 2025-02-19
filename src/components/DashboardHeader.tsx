@@ -4,8 +4,14 @@ import mushafLogo from "../assets/images/mushaf_1.png"
 import arrowIcon from "../assets/svg/arrow-icon.svg"
 import { MOBILE  } from "../constants/DEVICES_SIZE"
 import { useMediaQuery } from "@react-hook/media-query"
+import React from "react"
 
-const DashboardHeader = () => {
+interface DashboardProps {
+    time: string
+    name: string
+}
+
+const DashboardHeader: React.FC<DashboardProps> = ({ time, name }) => {
     const isMobile = useMediaQuery(MOBILE);
 
   return (
@@ -17,10 +23,10 @@ const DashboardHeader = () => {
             <Header1 
                 title={ isMobile ?
                     <>
-                        Selamat Pagi, <br /> Bu Lety!
+                        Selamat {time}, <br /> Bu {name}!
                     </> :
                     <>
-                        Selamat Pagi, Bu Lety!
+                        Selamat {time}, Bu {name}!
                     </>
                 } 
                 text="Jangan lupa mengaji hari ini. Yuk, lanjutkan bacaanmu!"
