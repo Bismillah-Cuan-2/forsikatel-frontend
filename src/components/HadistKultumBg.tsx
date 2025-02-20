@@ -47,7 +47,7 @@ const HadistKultumBg = ({children}: {children: React.ReactNode}) => {
             {/* Hadits dan kultum headline */}
             <div className="flex flex-col md:gap-2 2xl:w-[40%] pt-[2rem] md:pt-0 lg:w-[30%] w-full md:px-4 px-[5rem]">
                 <h2 className="lg:text-4xl text-[28px] font-bold text-primary-300 text-center lg:text-start">
-                    Hadist dan Kultum Hari Ini
+                    Hadits dan Kultum Hari Ini
                 </h2>
                 <span className="font-semibold font-source text-neutral-900 md:text-base text-xs text-center lg:text-start">
                     Temukan inspirasi dan ilmu baru setiap hari!
@@ -68,7 +68,7 @@ const HadistKultumBg = ({children}: {children: React.ReactNode}) => {
                 <h2 className="text-2xl hidden md:block font-semibold text-neutral-900">
                     Tonton Kultum Hari Ini
                 </h2>
-                <div className="bg-neutral-50 rounded-2xl pb-[4rem] drop-shadow-[0_10px_10px_rgba(0,0,0,0.25)]">
+                <div className="bg-neutral-50 rounded-2xl pb-[4rem] box-shadow">
                    {loading ? "Loading..." : 
                    <EmbedVideo 
                         videoId={data?.hadist_kultum.kultum} 
@@ -81,8 +81,8 @@ const HadistKultumBg = ({children}: {children: React.ReactNode}) => {
             {children}
         {/* Hadist hari ini */}
         <section className="flex flex-col w-full gap-2 2xl:pb-[5rem] px-[1rem] md:pr-[2.1rem] mt-5 md:mt-0">
-            <h2 className="text-2xl hidden md:block font-semibold text-neutral-900">Hadist Hari Ini</h2>
-            <div className=" bg-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.25)] rounded-2xl px-5 py-3 min-h-[10rem]">
+            <h2 className="text-2xl hidden md:block font-semibold text-neutral-900">Hadits Hari Ini</h2>
+            <div className=" bg-white box-shadow rounded-2xl px-5 py-3 min-h-[10rem]">
                 <p>{data?.hadist_kultum.hadist || loading}</p>
             </div>
         </section>

@@ -21,6 +21,7 @@ export interface TopRegion {
 }
 
 export interface DashboardResponse {
+    name: string
     hadits: string
     kalender: Calendar
     last_juz: number
