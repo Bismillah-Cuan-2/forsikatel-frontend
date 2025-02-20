@@ -18,11 +18,14 @@ const Dashboard = () => {
   const isMobile = useMediaQuery(MOBILE);
   const isDesktop = useMediaQuery(DESKTOP);
   const isTablet = useMediaQuery(TABLET);
-  const { data, loading, fetchData } = useFetch<DashboardResponse>(API_DASHBOARD, "GET", {Authorization: `Bearer ${localStorage.getItem("access_token")}`});
+  const { data, loading, error, fetchData } = useFetch<DashboardResponse>(API_DASHBOARD, "GET", {Authorization: `Bearer ${localStorage.getItem("access_token")}`});
+
+  if (localStorage.getItem("access_token") === null || error) {
+    
+  }
 
   useEffect(() => {
     fetchData();
-    console.log(data)
   }, []);
 
   return (
