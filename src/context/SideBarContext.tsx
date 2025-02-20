@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import moreIcon from "../assets/svg/more-icon.svg"
 import HeaderLogo from "../components/HeaderLogo";
 import { useMediaQuery } from "@react-hook/media-query";
-import { MOBILE } from "../constants/DEVICES_SIZE";
+import { MOBILE, TABLET } from "../constants/DEVICES_SIZE";
 
 interface SideBarContextProps {
     isOpen: boolean;
@@ -16,15 +16,27 @@ export const SideBarContextProvider: React.FC<{ children: ReactNode }> = ({ chil
   const [isOpen, setIsOpen] = useState(false);
   const toggleSideBar = () => setIsOpen(!isOpen);
   const isMobile = useMediaQuery(MOBILE);
+  const isTablet = useMediaQuery(TABLET)
 
   return (
     <SideBarContext.Provider value={{ isOpen, toggleSideBar }}>
-        {isMobile && 
-          <div className="fixed top-0 w-screen flex justify-between items-center border-b bg-neutral-50 z-10">
-            <Button onClick={toggleSideBar} Icon={moreIcon}/>
-            <HeaderLogo imgSize="w-10 h-8" classHeader="p-2"/>
-          </div>
+        {(isMobile || isTablet) && 
+          <>
+            <div className="fixed top-0 w-screen flex justify-between items-center border-b bg-neutral-50 z-10">
+              <Button onClick={toggleSideBar} Icon={moreIcon}/>
+              <HeaderLogo imgSize="w-10 h-8" classHeader="p-2"/>
+            </div>
+          </>
         }
+        {(isOpen && (isMobile || isTablet)) && 
+          <>
+            <div 
+                className="fixed inset-0 bg-black opacity-50 z-10"
+                onClick={toggleSideBar}
+            />
+          </>
+        }
+
         {children}
     </SideBarContext.Provider>
   );
