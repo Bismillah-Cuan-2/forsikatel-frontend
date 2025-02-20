@@ -1,5 +1,5 @@
 import { useMediaQuery } from "@react-hook/media-query";
-import { MOBILE, DESKTOP } from "../constants/DEVICES_SIZE";
+import { MOBILE, DESKTOP, TABLET } from "../constants/DEVICES_SIZE";
 import DashboardHeader from "../components/DashboardHeader";
 import DashboardKalender from "../components/DashboardKalender";
 import ProgressKhatamDashboard from "../components/ProgressKhatamDashboard";
@@ -12,10 +12,12 @@ import HadistHariIniDashBoard from "../components/HadistHariIniDashBoard";
 import RegionalJuzTerbanyakDashboard from "../components/RegionalJuzTerbanyakDashboard";
 import craneImage from "../assets/images/crane-logo.png";
 import LoadingCircular from "../components/LoadingCircular";
+import { toTitleCase } from "../utils/functions/toTitleCase";
 
 const Dashboard = () => {
   const isMobile = useMediaQuery(MOBILE);
   const isDesktop = useMediaQuery(DESKTOP);
+  const isTablet = useMediaQuery(TABLET);
   const { data, loading, fetchData } = useFetch<DashboardResponse>(API_DASHBOARD, "GET", {Authorization: `Bearer ${localStorage.getItem("access_token")}`});
 
   useEffect(() => {
@@ -23,15 +25,14 @@ const Dashboard = () => {
     console.log(data)
   }, []);
 
-
   return (
     <>
-      {isMobile && 
+      {(isMobile || isTablet) && 
         <>
           <div className="flex flex-col w-full h-full items-center px-4 gap-4">
             { !loading && data ? (
               <>
-                <DashboardHeader time={data.time_in_day} name={data.name}/>
+                <DashboardHeader time={data.time_in_day} name={toTitleCase(data.name_husband)}/>
                 <DashboardKalender data={data.kalender}/>
                 <div className="flex gap-3 items-start justify-between w-full">
                   <ProgressKhatamDashboard progress={data?.last_juz}/>
@@ -59,7 +60,7 @@ const Dashboard = () => {
             { !loading && data ? (
               <>
                 <div className="bg-neutral-100 flex flex-col rounded-3xl w-11/12 h-full justify-center items-center p-4 gap-4">
-                  <DashboardHeader time={data.time_in_day} name={"Afif"}/>
+                  <DashboardHeader time={data.time_in_day} name={toTitleCase(data.name_husband)}/>
                   <DashboardKalender data={data.kalender}/>
                   <div className="flex w-full gap-4 justify-between items-stretch">
                     <RegionalJuzTerbanyakDashboard data={data?.top_region} loading={loading}/>
