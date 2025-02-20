@@ -21,7 +21,7 @@ interface SetorNgajiProps {
 }
 
 const SetorNgajiInput: React.FC<SetorNgajiProps> = ({ onSubmitSuccess }) => {
-  const { data, error, loading, fetchData } = useFetch<SetorNgajiResponse>(
+  const { error, loading, fetchData } = useFetch<SetorNgajiResponse>(
     API_SETOR_NGAJI, 
     "POST", 
     { Authorization: `Bearer ${localStorage.getItem("access_token")}`}
@@ -29,15 +29,11 @@ const SetorNgajiInput: React.FC<SetorNgajiProps> = ({ onSubmitSuccess }) => {
   const [ showSnackbar, setShowSnackbar ] = useState(false)
 
   const handleSubmit = async (values: SetorNgajiInputValue) => {
-    setShowSnackbar(error===null ? true : false);
     try {
       await fetchData({ juz_read: Number(values.juz) });
 
-      if (data) {
-        console.log(data.msg);  // Ensure message logs only after a successful response
-      }
-
       if (!error) {
+        setShowSnackbar(true);
         onSubmitSuccess(); // Refresh main data after successful submission
       }
     } catch (err) {

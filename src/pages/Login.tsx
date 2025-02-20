@@ -3,17 +3,15 @@ import LoginForm from "../components/LoginForm"
 
 const Login = () => {
     return (
-      <div>
-          <BackgroundLogin>
-              <LoginForm />
+      <BackgroundLogin>
+          <LoginForm />
 
-              <div className="h-[0px] border border-neutral-200 w-full hidden sm:block"></div>
+          <div className="h-[0px] border border-neutral-200 w-full hidden sm:block"></div>
 
-              <div className="w-full gap-4 font-source">
-                <p className="text-sm">Belum punya akun? <a href="/register" className="text-primary-300 underline">Daftar Sekarang</a></p>
-              </div>
-          </BackgroundLogin>
-      </div>
+          <div className="w-full gap-4 font-source">
+            <p className="text-sm">Belum punya akun? <a href="/register" className="text-primary-300 underline">Daftar Sekarang</a></p>
+          </div>
+      </BackgroundLogin>
     )
   }
   
