@@ -2,6 +2,7 @@ import { Snackbar, Alert, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import errorIcon from "../assets/svg/error-icon.svg"
 import { ReactNode, useState } from "react";
+import { useEffect } from "react";
 
 interface ErrorInputSnackbarProps {
     error: boolean;
@@ -17,12 +18,16 @@ const ErrorInputSnackbar: React.FC<ErrorInputSnackbarProps> = ({ error, children
         setIsError(false);
     };
 
+    useEffect(() => {
+      setIsError(error);
+    }, [error]);
+
   return (
     <>
       <Snackbar open={isError} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
         <Alert
           onClose={handleClose}
-          severity="success"
+          severity="error"
           variant="filled"
           icon={
             <img src={errorIcon} />

@@ -11,7 +11,7 @@ function useFetch<T>(url: string, method: string = "GET", headers: HeadersInit =
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
+;
   const fetchData = async (body?: unknown) => {
     setLoading(true);
     try {

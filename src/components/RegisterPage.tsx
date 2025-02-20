@@ -5,13 +5,14 @@ import { Link,  } from "react-router-dom"
 import RegisterInput from './AuthInput'
 import searchSVG from '../assets/svg/search.svg'
 import Button from './Button'
-import { useState, useRef } from "react"
+import { useState, useRef,  } from "react"
 import RegionalPopOut from './RegionalPopOut'
 import useFetch from '../hooks/useFetch'
 import { API_REGISTER } from '../constants/URL_API'
 import validationSchema from '../schemas/RegisterValidationSchema'
 import ErrorInputSnackbar from './ErrorSnackbar'
 import SuccessSnackbar from './SuccessSnackbar'
+import { useEffect } from 'react'
 
 interface RegisterValues {
     fullName: string,
@@ -32,29 +33,48 @@ interface LoginResponse {
 export const RegisterPage = () => {
     const [showSearch, setShowSearch] = useState(false);
     const [showSnackbar, setShowSnackbar] = useState(false);
-    const { data, error, loading, fetchData } = useFetch<LoginResponse>(API_REGISTER, "POST");
+    const [showError, setShowError] = useState(false);
+    const {  error, loading, fetchData } = useFetch<LoginResponse>(API_REGISTER, "POST");
     const initialValues = { fullName: "", phoneNumber: "",  regional: "", regionalValue: "" };
     // const Navigate = useNavigate()
 
     const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        // When the hook's error value changes, update your local state.
+        if (error) {
+            setShowError(true);
+            setShowSnackbar(false);
+          }
+      }, [error]);
+
     async function handleSubmit(e: RegisterValues) {
+        setShowError(false);
+        setShowSnackbar(false);
+
         try {
-            await fetchData({ name_husband: e.fullName, phone_number: e.phoneNumber, regional: e.regionalValue });
-            if (data) {
-                localStorage.setItem("access_token", data.access_token);
-                localStorage.setItem("refresh_token", data.refresh_token); 
+            await fetchData({
+                name_husband: e.fullName,
+                phone_number: e.phoneNumber,
+                regional: e.regionalValue,
+            });
+
+            if (!error) {
+                setShowSnackbar(true);
+            } else if (error) {
+                // Even if error is true, we already reset it above
+                setShowError(true);
             }
-           
-            setShowSnackbar(error=== null ? true : false);
-            // Navigate("/login");
-        } catch (error) {
-          
+        } catch (err) {
+            console.log("Error submitting:", err);
+            setShowError(true);
         }
-        console.log("Error submitting:", error);
+                               
+            // Navigate("/login");     
+        // console.log("Error submitting:", error);
     }
 
     
-
   return (
     <>
         {/* Background white for mobile */}
@@ -86,12 +106,13 @@ export const RegisterPage = () => {
                             >
                         {({ isSubmitting, values, setFieldValue }) => (
                             <Form className="w-full">
-                                <div className="flex flex-col gap-5 pb-[3rem]">
+                                <div className="flex flex-col gap-5">
                                     <RegisterInput 
                                         id="fullName" 
                                         label="Nama - Nama Suami" 
                                         type="text" 
                                         placeholder='Masukkan Nama - Nama Suami'
+                                        autoComplete='new-password'
                                         value={values.fullName}   
                                     />
                                     <RegisterInput 
@@ -99,6 +120,7 @@ export const RegisterPage = () => {
                                         label="Nomor Handphone" 
                                         type="text" 
                                         placeholder='Gunakan nomor yang aktif'
+                                        autoComplete='new-password'
                                         value={values.phoneNumber} 
                                     />
                                     <div>
@@ -133,13 +155,13 @@ export const RegisterPage = () => {
                                                 className="justify-center px-3 py-2 rounded-none font-bold text-base font-source"
                                                 color='bg-primary-300  text-white w-full hover:bg-primary-200 '
                                                 type="submit"
-                                                // disabled={isSubmitting}
+                                                disabled={isSubmitting}
                                             >
                                                 {loading ? "Loading..." : "Daftar Sekarang"}
                                             </Button>
                                     </div>
 
-                                    <hr className="h-px my-8 border-0 bg-[#DDE1E6] " />
+                                    <hr className="h-px my-3 border-0 bg-[#DDE1E6] " />
                                     <p className="text-neutal-900 text-sm font-normal font-source">Sudah punya akun?  
                                         <Link to="/login" className="text-primary-300 hover:text-primary-100 font-normal underline"> Masuk di sini</Link>
                                     </p>
@@ -154,7 +176,7 @@ export const RegisterPage = () => {
             </section>
             </div>
         </div>
-        {error !== null  ? (<ErrorInputSnackbar error={true}>
+       {showError &&  <ErrorInputSnackbar  error={showError}>
             
         <div className="flex flex-col font-source">
                     <p className="text-lg font-semibold">
@@ -169,8 +191,8 @@ export const RegisterPage = () => {
                             <li>Jika masalah berlanjut, hubungi tim dukungan kami.</li>
                         </ul> 
                 </div>
-        </ErrorInputSnackbar>) : (
-        <SuccessSnackbar isOpen={showSnackbar} handleClose={() => setShowSnackbar(false)}>
+        </ErrorInputSnackbar>}
+        <SuccessSnackbar isOpen={showSnackbar} handleClose={() => {setShowSnackbar(false); } }>
         <div className="flex flex-col font-source">
                   <p className="text-lg font-semibold">
                       Registrasi Berhasil!
@@ -179,7 +201,7 @@ export const RegisterPage = () => {
                       Selamat, akunmu telah berhasil dibuat.
                   </p>
                 </div>
-            </SuccessSnackbar>)}
+            </SuccessSnackbar>
         
     </>
   )
